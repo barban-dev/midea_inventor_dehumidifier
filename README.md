@@ -17,9 +17,7 @@ Target devices
 --------------
 Even though the library has been designed to generically address any kind of existing midea devices, please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).
 
-If you are interested in developing code which is able to control Midea/Inventor Air Condition systems (0xAC type devices), you can have a look at ***midea-air-condition*** Ruby&Rails library by **Balazs Nadasdi** available here:
-
-https://rubygems.org/gems/midea-air-condition/versions/0.0.3
+If you are interested in developing code which is able to control Midea/Inventor Air Condition systems (0xAC type devices), you can have a look at ***midea-air-condition*** Ruby&Rails library by **Balazs Nadasdi** available here: https://rubygems.org/gems/midea-air-condition/versions/0.0.3
 
 
 Prerequisites
