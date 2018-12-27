@@ -7,9 +7,10 @@ This repo contains the python package ***midea_inventor_lib*** that implements a
 
 Info about the dehumidifier appliance can be found [here.](https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l)
 
-You can buy the the dehumidifier appliance on Amazon:
+You can buy the the smart dehumidifier appliance (WiFi version) on Amazon (the two links below contain my referral code):
 * [Amazon.co.uk](https://www.amazon.co.uk/gp/product/B07665CCSM/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=barban0d-21&creative=6738&linkCode=as2&creativeASIN=B07665CCSM&linkId=a7408b12a09679586e1816acc3c9d74b)
 * [Amazon.it](https://www.amazon.it/gp/product/B075486X31/ref=as_li_tl?ie=UTF8&camp=3414&creative=21718&creativeASIN=B075486X31&linkCode=as2&tag=barban03-21&linkId=33e8ff818aaa4b45f0c320e6661773b2)
+
 
 Target devices
 --------------
