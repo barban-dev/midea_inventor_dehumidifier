@@ -165,10 +165,14 @@ A brief description of the most relevant endpoints follows:
 
 ```/v1/appliance/transparent/send``` endpoint with the 'order' parameter is used to control the home device (the 'reply' parameter is returned). Both the 'order' and 'reply' parameters are AES encryted; the encryption/decryption key used by AES is derived from the 'APP_key' parameter (constant string) and the 'accessToken' parameter returned when logging in. The revelant part of code used for the encription and decryption tasks can be found in the **MideaSecurity** class in **midea_security.py** file.
 
+For Further Studies (FFS)
+-------------------------
+At the moment, the client-side Python library can control a dehumidifier appliance by sending API messages to the cloud Server that talks to the home device. Both the client and the home device need Internet access in this cloud-to-cloud scenario. 
+The possibility to control the home device locally (i.e. the possibility to let the client to send API messagges directly to the home device) when both the client and the home device are associated to the same WiFi network is FFS.
+
 How to contribute
 -----------------
 If you can code in Python and you are interested in improving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
-
 
 Disclaimer
 ----------
