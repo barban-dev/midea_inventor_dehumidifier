@@ -1,20 +1,26 @@
 # Library for EVA II PRO WiFi Smart Dehumidifier appliance
 Author: Andrea Barbaresi -2018-
+
 Licence: GPL v3
 
 This repo contains midea_inventor_lib which is a python package implementing a library to interface to the Web API provided by Midea/Inventor in order to remotely control a EVA II PRO WiFi Smart Dehumidifier device by using their cloud platform.
+
 You can get info about the device here:
+
 https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
 
 The official companion Apps are available on the app stores from Google and Apple:
-Google Play: https://play.google.com/store/apps/details?id=com.inventor
-Apple Store: https://itunes.apple.com/gr/app/invmate-ii/id1109243423?mt=8
+
+* Google Play: https://play.google.com/store/apps/details?id=com.inventor
+* Apple Store: https://itunes.apple.com/gr/app/invmate-ii/id1109243423
 
 
 Target devices
 --------------
 Even though the library has been designed to generically address any kind of existing midea devices, please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).
+
 If you are interested in code which is able to control Midea/Inventor Air Condition systems (0xA1 type devices) you can have a look at midea-air-condition Ruby&Rails library by Balazs Nadasdi available here:
+
 https://rubygems.org/gems/midea-air-condition/versions/0.0.3
 
 
@@ -35,10 +41,12 @@ from midea_inventor_lib import MideaClient
 ```
 
 Step 2: Instantiate the MideaClient object
+
 Using clear-text password:
 ```
 client = MideaClient("user.example@gmail.com", "myPassword", "")
 ```
+
 Using sha256 hash of the password:
 ```
 client = MideaClient("user.example@gmail.com", "", "76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6")
