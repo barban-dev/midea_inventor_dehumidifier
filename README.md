@@ -69,6 +69,7 @@ for a in appliances:
 ```
 
 Step 5: Send commands to control the target device 
+
 Get the device state:
 ```
 res = client.get_device_status(deviceId)
@@ -87,7 +88,39 @@ res = client.send_poweroff_command(deviceId)
 if res:
   print client.deviceStatus.toString();
 ```
-
+Set Ion on:
+```
+res = client.send_ion_on_command(deviceId)
+if res:
+  print client.deviceStatus.toString();
+```
+Set Ion off:
+```
+res = client.send_ion_off_command(deviceId)
+if res:
+  print client.deviceStatus.toString();
+```
+Set fan speed:
+```
+if speed > 0 and speed < 100:
+  res = client.send_fan_speed_command(deviceId, speed)
+  if res:
+    print client.deviceStatus.toString();
+```
+Set target humidity:
+```
+if hum >= 30 and hum <= 70:
+  res = client.send_target_humidity_command(deviceId, hum)
+  if res:
+    print client.deviceStatus.toString();
+```
+Set operation mode:
+```
+if mode > 0 and mode < 5:
+  res = client.send_mode_command(deviceId, mode)  #set Mode (1:TARGET_MODE, 2:CONTINOUS_MODE, 3:SMART_MODE, 4:DRYER_MODE)
+  if res:
+    print client.deviceStatus.toString();
+```
 
 
 Client example
