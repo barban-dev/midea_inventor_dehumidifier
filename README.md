@@ -9,8 +9,8 @@ You can get info about the dehumidifier apliance here: https://www.inventorappli
 
 The official companion Apps are available on Google's and Apple's App Stores:
 
-* Google Play: https://play.google.com/store/apps/details?id=com.inventor
-* Apple Store: https://itunes.apple.com/gr/app/invmate-ii/id1109243423
+* [Google Play](https://play.google.com/store/apps/details?id=com.inventor)
+* [Apple Store](https://itunes.apple.com/gr/app/invmate-ii/id1109243423)
 
 
 Target devices
