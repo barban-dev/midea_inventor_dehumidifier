@@ -144,7 +144,7 @@ Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_pa
 
 Internals 
 ---------
-***You can skip this part if you are not interested in technical details concerning the format of the API messages used by the library***
+***You can skip this part if you are not interested in technical details concerning the format of the API messages used by the library.***
 
 Official companion Apps for Android and IOS platforms are based on the midea-SDKs made available by Midea Smart Technology Co., Ltd.:
 * [ios-sdk](https://github.com/midea-sdk-org/ios-sdk)
@@ -155,7 +155,7 @@ According to the SDK's documentation, "MideaSDK is a software develop kit mainta
 Official documentation for the open API can be found here (chinese language only):
 https://github.com/midea-sdk/midea-sdk.github.io/tree/master/api
 
-Apart Androd and IOS platforms, no other environment are currently officially supported. In order to develop the client-side library for all the platform supporting Python, I used a Man-In-The-Middle Web Proxy as a packet sniffer to understand the basics on the API messages exchanged between the offical Android client and the Midea cloud Server.
+Apart Androd and IOS platforms, no other environment is currently officially supported. In order to develop the client-side library for all the platform supporting Python, I used a Man-In-The-Middle Web Proxy as a packet sniffer to understand the basics on the API messages exchanged between the offical Android client and the Midea cloud Server.
 
 Web API server can be reached via ```https://mapp-appsmb.com/<endpoint>``` (POST web requests shoud be used).
 
