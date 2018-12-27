@@ -9,7 +9,7 @@ Info about the dehumidifier appliance can be found [here.](https://www.inventora
 
 You can buy the the dehumidifier appliance on Amazon:
 * [Amazon.co.uk](https://www.amazon.co.uk/gp/product/B07665CCSM)
-* [Amazon.it](https://www.amazon.it/gp/product/B075486X31)
+* [Amazon.it](https://www.amazon.it/gp/product/B075486X31/ref=as_li_tl?ie=UTF8&camp=3414&creative=21718&creativeASIN=B075486X31&linkCode=as2&tag=barban03-21&linkId=33e8ff818aaa4b45f0c320e6661773b2)
 
 Target devices
 --------------
