@@ -5,13 +5,11 @@ Licence: GPLv3
 
 This repo contains the python package ***midea_inventor_lib*** that implements a client-side library to connect to the Web API provided by Midea/Inventor, in order to remotely control an **EVA II PRO WiFi Smart Dehumidifier device**.
 
-You can get info about the dehumidifier appliance here: https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
+Info about the dehumidifier appliance can be found here: https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
 
-The official companion Apps are available on Google's and Apple's App Stores:
-
-* [Google Play](https://play.google.com/store/apps/details?id=com.inventor)
-* [Apple Store](https://itunes.apple.com/gr/app/invmate-ii/id1109243423)
-
+You can buy the the dehumidifier appliance on Amazon:
+* [Amazon.co.uk](https://www.amazon.co.uk/gp/product/B07665CCSM)
+* [Amazon.it](https://www.amazon.it/gp/product/B075486X31)
 
 Target devices
 --------------
@@ -22,7 +20,12 @@ If you are interested in developing code that is able to control Midea/Inventor 
 
 Prerequisites
 -------------
-In order to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first of all it is necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). Once connected with valid credentials (i.e. email address and password), your home device has to be added to the list of configured devices using the App (please refer to the manual of the official App to accomplish this task).
+In order to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first of all it is necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). 
+The official companion Apps are available on Google's and Apple's App Stores:
+* [Google Play](https://play.google.com/store/apps/details?id=com.inventor)
+* [Apple Store](https://itunes.apple.com/gr/app/invmate-ii/id1109243423)
+
+Once connected with valid credentials (i.e. email address and password), your home device has to be added to the list of configured devices using the App (please refer to the manual of the official App to accomplish this task).
 
 Once having a valid registered user and the home device configured, you can start to use the python library instead of the offical App to control the device via Internet (both the client when the library is installed and the home device should be connected to the Internet).
 
