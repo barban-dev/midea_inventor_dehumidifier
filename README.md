@@ -5,7 +5,7 @@ Licence: GPLv3
 
 This repo contains the python package ***midea_inventor_lib*** that implements a client-side library to connect to the Web API provided by Midea/Inventor, in order to remotely control an **EVA II PRO WiFi Smart Dehumidifier device**.
 
-Info about the dehumidifier appliance can be found here: https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
+Info about the dehumidifier appliance can be found [here.](https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l)
 
 You can buy the the dehumidifier appliance on Amazon:
 * [Amazon.co.uk](https://www.amazon.co.uk/gp/product/B07665CCSM)
@@ -20,7 +20,7 @@ If you are interested in developing code that is able to control Midea/Inventor 
 
 Prerequisites
 -------------
-In order to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first of all it is necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). 
+In order to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided Python library, first of all it is necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). 
 The official companion Apps are available on Google's and Apple's App Stores:
 * [Google Play](https://play.google.com/store/apps/details?id=com.inventor)
 * [Apple Store](https://itunes.apple.com/gr/app/invmate-ii/id1109243423)
