@@ -3,7 +3,7 @@ Author: Andrea Barbaresi =2018=
 
 Licence: GPLv3
 
-This repo contains the python package ***midea_inventor_lib*** which implements a client-side library to interface to the Web API provided by Midea/Inventor in order to remotely control a **EVA II PRO WiFi Smart Dehumidifier device**.
+This repo contains the python package ***midea_inventor_lib*** that implements a client-side library to connect to the Web API provided by Midea/Inventor, in order to remotely control an **EVA II PRO WiFi Smart Dehumidifier device**.
 
 You can get info about the dehumidifier appliance here: https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
 
@@ -15,14 +15,14 @@ The official companion Apps are available on Google's and Apple's App Stores:
 
 Target devices
 --------------
-Even though the library has been designed to generically address any kind of existing midea devices, ***please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).***
+Even though the library has been designed to generically address any kind of existing MIDEA devices, ***please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).***
 
-If you are interested in developing code which is able to control Midea/Inventor Air Condition systems (0xAC type devices), you can have a look at ***midea-air-condition*** Ruby&Rails library by **Balazs Nadasdi** available here: https://rubygems.org/gems/midea-air-condition/versions/0.0.3
+If you are interested in developing code that is able to control Midea/Inventor Air Condition systems (0xAC type devices), you can have a look at ***midea-air-condition*** Ruby&Rails library by **Balazs Nadasdi** available here: https://rubygems.org/gems/midea-air-condition/versions/0.0.3
 
 
 Prerequisites
 -------------
-In order to be able to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, it is first necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). Once connected with valid credentials (i.e. email address and password), your home device has to be added to the list of configured devices using the App (please refer to the manual of the official App to accomplish this task).
+In order to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first of all it is necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). Once connected with valid credentials (i.e. email address and password), your home device has to be added to the list of configured devices using the App (please refer to the manual of the official App to accomplish this task).
 
 Once having a valid registered user and the home device configured, you can start to use the python library instead of the offical App to control the device via Internet (both the client when the library is installed and the home device should be connected to the Internet).
 
@@ -116,9 +116,9 @@ if mode > 0 and mode < 5:
 
 Client example
 --------------
-This repo also comtains a full working client (***dehumi_control.py***) which demonstrates how to use the ***midea_inventor_lib*** library in order to control the EVA II PRO WiFi Smart Dehumidifier appliance via a Command Line Interface.
+This repo also contains a fully working client (***dehumi_control.py***) that demonstrates how to use the ***midea_inventor_lib*** library in order to control the EVA II PRO WiFi Smart Dehumidifier appliance via a Command Line Interface.
 
-To use the client, email address of a registered user and the associated password have to be provided via command line parameters (either clear-text password or password's sha-256 hash has to be provided using the '-p' or '-s' options):
+To use the client, the email address of a registered user and the associated password have to be provided via command line parameters (either clear-text password or password's sha-256 hash has to be provided using the '-p' or '-s' options):
 ```
 # python dehumi_control.py  -h
 Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_password> -l <logfile> [-h] [-v] [-d]
@@ -126,9 +126,9 @@ Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_pa
 
 How to contribute
 -----------------
-If you can code in Python and you are interested in improoving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
+If you can code in Python and you are interested in improving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
 
 
 Disclaimer
 ----------
-Besides owning a EVA II PRO WiFi device, I have no connection with Midea/Inventor company. This library was developed for my own use and shared to other people interested on Internet of Things systems and domotic platforms. This software is provided as is, without any warranty, according to the GNU Public Licence version 3.
+Besides owning an EVA II PRO WiFi device, I have no connection with Midea/Inventor company. This library was developed for my own personal use and shared to other people interested on Internet of Things systems and domotic platforms. This software is provided as is, without any warranty, according to the GNU Public Licence version 3.
