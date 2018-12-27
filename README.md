@@ -126,7 +126,7 @@ Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_pa
 
 How to contribute
 -----------------
-If you can write Python and you are interested in improoving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
+If you can code in Python and you are interested in improoving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
 
 
 Disclaimer
