@@ -45,6 +45,21 @@ Using password's sha-256 hash:
 ```
 client = MideaClient("user.example@gmail.com", "", "76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6")
 ```
+**Enable logging (optional):**
+
+You can enable logging by setting the 'verbose' parameter to True (default is False) in the MideaClient constructor. 
+Set 'debug' parameter to True in order to log debugging messages too (default is False).
+Set 'logfile' string parameter to a full-path filename in order to make the library log messages into a file instead of using the console (default).
+E.g.:
+```
+_email = "user.example@gmail.com"
+_password = "myPassword"
+_sha256password = ""
+_verbose = True		#Enable logging
+_debug = False		#Disable debug messages
+_logfile = ""		#Log to console (default)
+client = MideaClient(_email, _password, _sha256password, _debug, _verbose, _logfile)
+```
 **Step 3: Activate a new session by logging in**
 ```
 res = client.login()
