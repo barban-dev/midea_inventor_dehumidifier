@@ -154,17 +154,16 @@ https://github.com/midea-sdk/midea-sdk.github.io/tree/master/api
 Apart Androd and IOS platforms, no other environment are currently officially supported. In order to develop the client-side library for all the platform supporting Python, I used a Man-In-The-Middle Web Proxy as a packet sniffer to understand the basics on the API messages exchanged between the offical Android client and the Midea cloud Server.
 
 Web API server can be reached via ```https://mapp-appsmb.com/<endpoint>``` (POST web requests shoud be used).
+
 A brief description of the most relevant endpoints follows:
 
-```/v1/user/login/id/get``` endpoint with 'loginAccount' is used to get loginID (different for each session)
+```/v1/user/login/id/get``` endpoint with 'loginAccount' parameter is used to get 'loginId' parameter (different for each session).
 
-```/v1/user/login``` endpoint with password parameter is used to perform log-in ('accessToken' and 'sessionId' parameters are returned)
-The password parameter sent by the client is SHA-256 hash of a string derived from 'loginId', 'password' and 'appKey'
+```/v1/user/login``` endpoint with 'password' parameter is used to perform the login ('accessToken' and 'sessionId' parameters are returned). The password parameter sent by the client is SHA-256 hash of a string derived from 'loginId', 'password' and 'appKey' parameters.
 
 ```/v1/appliance/user/list/get``` endpoint is used to retrieve the list of configured devices together withh all the associated parameters ('name', 'modelNumber', 'activeStaus', 'onlineStatus', etc.)
 
-```/v1/appliance/transparent/send``` endpoint with the 'order' parameter is used to control the home device (reply parameter is returned)
-Both 'order' and 'reply' parameters are AES encryted; the encrypting/decrypting key used by AES is derived from the APP key (constant string) and the 'accessToken' parameter returned when logging in. The revelant part of code used for the encription and decryption taks can be found in the MideaSecurity class in midea_security.py file.
+```/v1/appliance/transparent/send``` endpoint with the 'order' parameter is used to control the home device (the 'reply' parameter is returned). Both the 'order' and 'reply' parameters are AES encryted; the encryption/decryption key used by AES is derived from the 'APP_key' parameter (constant string) and the 'accessToken' parameter returned when logging in. The revelant part of code used for the encription and decryption tasks can be found in the **MideaSecurity** class in **midea_security.py** file.
 
 How to contribute
 -----------------
