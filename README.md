@@ -124,7 +124,7 @@ To use the client, email address of a registered user and the associated passwor
 Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_password> -l <logfile> [-h] [-v] [-d]
 ```
 
-Hot to contribute
+How to contribute
 -----------------
 If you can write Python and you are interested in improoving and expanding this work, feel free to clone this repo. Drop me a line if you wish to merge your modifications in my repo too.
 
