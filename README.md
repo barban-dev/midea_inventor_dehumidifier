@@ -1,15 +1,15 @@
 # Library for EVA II PRO WiFi Smart Dehumidifier appliance
-Author: Andrea Barbaresi -2018-
+Author: Andrea Barbaresi =2018=
 
-Licence: GPL v3
+Licence: GPLv3
 
-This repo contains midea_inventor_lib which is a python package implementing a library to interface to the Web API provided by Midea/Inventor in order to remotely control a EVA II PRO WiFi Smart Dehumidifier device by using their cloud platform.
+This repo contains the python package *midea_inventor_lib* which implements a library to interface to the Web API provided by Midea/Inventor in order to remotely control a **EVA II PRO WiFi Smart Dehumidifier device**.
 
-You can get info about the device here:
+You can get info about the dehumidifier device here:
 
 https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l
 
-The official companion Apps are available on the app stores from Google and Apple:
+The official companion Apps are available on Google's and Apple's App Stores:
 
 * Google Play: https://play.google.com/store/apps/details?id=com.inventor
 * Apple Store: https://itunes.apple.com/gr/app/invmate-ii/id1109243423
@@ -19,28 +19,27 @@ Target devices
 --------------
 Even though the library has been designed to generically address any kind of existing midea devices, please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).
 
-If you are interested in code which is able to control Midea/Inventor Air Condition systems (0xA1 type devices) you can have a look at midea-air-condition Ruby&Rails library by Balazs Nadasdi available here:
+If you are interested in developing code which is able to control Midea/Inventor Air Condition systems (0xA1 type devices), you can have a look at *midea-air-condition* Ruby&Rails library by **Balazs Nadasdi** available here:
 
 https://rubygems.org/gems/midea-air-condition/versions/0.0.3
 
 
 Prerequisites
 -------------
-In order to be able to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first it is necessary to download and install the official App in order to register a valid user to the cloud platform (a valid email address and password are required). Once connected with a valid user using the App, your home device has to be added to the list of configured devices (please refer to the manual of the Official App for this task).
+In order to be able to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, it is first necessary to download and install the official App, in order to register a valid user to the cloud platform (a valid email address is required). Once connected with valid credentials (i.e. email address and password) using the App, your home device has to be added to the list of configured devices (please refer to the manual of the Official App to accomplish this task).
 
-Once having a valid registered user and the home device configured, you can use the python library to control the device via Internet using the available Web Api (both the client when the library is installed and the home device should be connected to the Internet).
+Once having a valid registered user and the home device configured, you can start to use the python library instead of the offical App to control the device via Internet (both the client when the library is installed and the home device should be connected to the Internet).
 
 
 Getting started
 ---------------
 Minimal steps to use the library in your python code are reported below:
 
-Step 1: Include the python package
+**Step 1: Include the python package**
 ```
 from midea_inventor_lib import MideaClient
 ```
-
-Step 2: Instantiate the MideaClient object
+**Step 2: Instantiate the MideaClient object**
 
 Using clear-text password:
 ```
