@@ -6,11 +6,11 @@ import requests
 import json
 import logging
 from midea_inventor_lib import MideaClient
-from midea_inventor_lib import MideaSecurity
-from midea_inventor_lib import DataBodyDeHumiQuery
-from midea_inventor_lib import DataBodyDeHumiResponse
-from midea_inventor_lib import MideaDehumidificationDevice
-from midea_inventor_lib import DataBodyDeHumiRequest
+#from midea_inventor_lib import MideaSecurity
+#from midea_inventor_lib import DataBodyDeHumiQuery
+#from midea_inventor_lib import DataBodyDeHumiResponse
+#from midea_inventor_lib import MideaDehumidificationDevice
+#from midea_inventor_lib import DataBodyDeHumiRequest
 
 
 client = None
