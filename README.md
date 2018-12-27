@@ -1,6 +1,4 @@
-# midea_inventor_dehumidifier
-Library for EVA II PRO WiFi Smart Dehumidifier appliance by Midea/Inventor
-========================================
+# Library for EVA II PRO WiFi Smart Dehumidifier appliance
 Author: Andrea Barbaresi -2018-
 Licence: GPL v3
 
@@ -20,56 +18,67 @@ If you are interested in code which is able to control Midea/Inventor Air Condit
 https://rubygems.org/gems/midea-air-condition/versions/0.0.3
 
 
-Pre-requisites
---------------
+Prerequisites
+-------------
 In order to be able to control the EVA II PRO WiFi Smart Dehumidifier appliance using the provided python library, first it is necessary to download and install the official App in order to register a valid user to the cloud platform (a valid email address and password are required). Once connected with a valid user using the App, your home device has to be added to the list of configured devices (please refer to the manual of the Official App for this task).
 
 Once having a valid registered user and the home device configured, you can use the python library to control the device via Internet using the available Web Api (both the client when the library is installed and the home device should be connected to the Internet).
 
 
-Basic usage
------------
+Getting started
+---------------
 Minimal steps to use the library in your python code are reported below:
 
-Step 1: include the python package
-  >>>> from midea_inventor_lib import MideaClient
+Step 1: Include the python package
+```
+from midea_inventor_lib import MideaClient
+```
 
-Step 2: instantiate the MideaClient object
+Step 2: Instantiate the MideaClient object
 Using clear-text password:
-  >>>> client = MideaClient("user.example@gmail.com", "myPassword", "")
+```
+client = MideaClient("user.example@gmail.com", "myPassword", "")
+```
 Using sha256 hash of the password:
-  >>>> client = MideaClient("user.example@gmail.com", "", "76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6")
-
-Step 3: Activate a session by logging in 
-  >>>> res = client.login()
-  >>>> if res == -1:
-  >>>>   print "Login error: please check log messages."
-  >>>> else:
-  >>>>  sessionId = client.current["sessionId"]
+```
+client = MideaClient("user.example@gmail.com", "", "76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6")
+```
+Step 3: Activate a new session by logging in 
+```
+res = client.login()
+if res == -1:
+  print "Login error: please check log messages."
+else:
+  sessionId = client.current["sessionId"]
+```
 
 Step 4: Get the target deviceId by retrieving the list of configured appliances
-  >>>> appliances = {}
-  >>>> appliances = client.listAppliances()
-  >>>> for a in appliances:
-  >>>>   print "[id="+a["id"]+" type="+a["type"]+" name="+a["name"]+"]"
+```
+appliances = {}
+appliances = client.listAppliances()
+for a in appliances:
+  print "[id="+a["id"]+" type="+a["type"]+" name="+a["name"]+"]"
+```
 
 Step 5: Send commands to control the target device 
 Get the device state:
-  >>>> res = client.get_device_status(deviceId)
-  >>>> if res == 1:
-  >>>>   print client.deviceStatus.toString()
-
+```
+res = client.get_device_status(deviceId)
+if res == 1:
+  print client.deviceStatus.toString()
+```
 Power-on:
-  >>>> res = client.send_poweron_command(deviceId)
-  >>>> if res:
-  >>>>   print client.deviceStatus.toString();
-
+```
+res = client.send_poweron_command(deviceId)
+if res:
+  print client.deviceStatus.toString();
+```
 Power-off:
-  >>>> res = client.send_poweroff_command(deviceId)
-  >>>> if res:
-  >>>>   print client.deviceStatus.toString();
-
-
+```
+res = client.send_poweroff_command(deviceId)
+if res:
+  print client.deviceStatus.toString();
+```
 
 
 
@@ -78,9 +87,10 @@ Client example
 This repo comtains a full working client ("dehumi_control.py") which demonstrates how to use the library in order to control the EVA II PRO WiFi Smart Dehumidifier appliance.
 
 To use the client, email address and password have to be provided via command line (clear-text password or its sha256 hash can be provided using the different options):
-  >>>># python dehumi_control.py  -h
-  >>>> Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_password> -l <logfile> [-h] [-v] [-d]
-
+```
+# python dehumi_control.py  -h
+Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_password> -l <logfile> [-h] [-v] [-d]
+```
 
 
 Disclaimer
