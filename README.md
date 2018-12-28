@@ -31,6 +31,25 @@ Once connected with valid credentials (i.e. email address and password), your ho
 Once having a valid registered user and the home device configured, you can start to use the python library instead of the offical App to control the device via Internet (both the client when the library is installed and the home device should be connected to the Internet).
 
 
+Installation
+------------
+Install from PyPi using [pip](http://www.pip-installer.org/en/latest), a package manager for
+Python.
+```
+pip install midea-inventor-lib
+```
+Don't have pip installed? Try installing it, by running this from the
+command line:
+```
+$ curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+```
+Or, you can [download the source code (ZIP)](https://github.com/barban-dev/midea_inventor_dehumidifier/zipball/master) and then run:
+```
+python setup.py install
+```
+You may need to run the above commands with ``sudo``.
+
+
 Getting started
 ---------------
 Minimal steps to use the library in your python code are reported below:
