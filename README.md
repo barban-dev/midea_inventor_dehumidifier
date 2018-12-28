@@ -5,6 +5,7 @@
 [![](https://img.shields.io/pypi/wheel/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
 [![](https://img.shields.io/pypi/status/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
 [![](https://img.shields.io/pypi/implementation/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
+[![<100kB](https://img.shields.io/github/languages/code-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![HitCount](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier.svg)](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier)
 
 Author: Andrea Barbaresi =2018=
