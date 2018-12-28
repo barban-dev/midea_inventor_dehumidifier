@@ -3,6 +3,7 @@
 [![](https://img.shields.io/pypi/pyversions/midea-inventor-lib.svg)](https://pypi.org/project/midea-inventor-lib/)
 [![](https://img.shields.io/pypi/l/midea-inventor-lib.svg)](https://pypi.org/project/midea-inventor-lib/)
 [![](https://img.shields.io/pypi/wheel/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
+[![](https://img.shields.io/pypi/status/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
 
 Author: Andrea Barbaresi =2018=
 
