@@ -1,5 +1,7 @@
 # Library for EVA II PRO WiFi Smart Dehumidifier appliance
 [![PyPI](https://img.shields.io/pypi/v/midea-inventor-lib.svg)](https://pypi.org/project/midea-inventor-lib/)
+[![](https://img.shields.io/pypi/pyversions/midea-inventor-lib.svg)](https://pypi.org/project/midea-inventor-lib/)
+[![](https://img.shields.io/pypi/l/midea-inventor-lib.svg)](https://pypi.org/project/midea-inventor-lib/)
 
 Author: Andrea Barbaresi =2018=
 
