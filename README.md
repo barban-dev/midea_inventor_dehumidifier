@@ -7,6 +7,7 @@
 [![](https://img.shields.io/pypi/implementation/midea-inventor-lib.svg)](https://pypi.org/pypi/midea-inventor-lib/)
 [![<100kB](https://img.shields.io/github/languages/code-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![<100kB](https://img.shields.io/github/repo-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
+[![Build status](https://travis-ci.org/barban-dev/midea_inventor_dehumidifier.svg?branch=master)](https://travis-ci.org/barban-dev/midea_inventor_dehumidifier)
 [![HitCount](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier.svg)](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
 
