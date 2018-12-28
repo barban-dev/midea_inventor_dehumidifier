@@ -8,6 +8,8 @@
 [![<100kB](https://img.shields.io/github/languages/code-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![<100kB](https://img.shields.io/github/repo-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![HitCount](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier.svg)](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
+
 
 Author: Andrea Barbaresi =2018=
 
@@ -210,3 +212,10 @@ If you can code in Python and you are interested in improving and expanding this
 Disclaimer
 ----------
 Besides owning an EVA II PRO WiFi device, I have no connection with Midea/Inventor company. This library was developed for my own personal use and shared to other people interested on Internet of Things systems and domotic platforms. This software is provided as is, without any warranty, according to the GNU Public Licence version 3.
+
+Donations
+---------
+If this project helps you to reduce time to develop your code, you can make me a donation.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
+
