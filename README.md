@@ -55,7 +55,7 @@ Getting started
 Minimal steps to use the library in your python code are reported below:
 
 **Step 1: Include the python package**
-```
+``` code:: python
 from midea_inventor_lib import MideaClient
 ```
 **Step 2: Instantiate the MideaClient object**
