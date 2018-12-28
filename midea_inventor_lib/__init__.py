@@ -5,3 +5,4 @@ from midea_databody_dehumi_response import DataBodyDeHumiResponse
 from midea_dehumidification_device import MideaDehumidificationDevice
 from midea_databody_dehumi_request import DataBodyDeHumiRequest
 
+name = "midea_inventor_lib"
