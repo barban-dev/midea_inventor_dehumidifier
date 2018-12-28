@@ -55,17 +55,17 @@ Getting started
 Minimal steps to use the library in your python code are reported below:
 
 **Step 1: Include the python package**
-``` code:: python
+```python
 from midea_inventor_lib import MideaClient
 ```
 **Step 2: Instantiate the MideaClient object**
 
 Using clear-text password:
-```
+```python
 client = MideaClient("user.example@gmail.com", "myPassword", "")
 ```
 Using password's sha-256 hash:
-```
+```python
 client = MideaClient("user.example@gmail.com", "", "76549b827ec46e705fd03831813fa52172338f0dfcbd711ed44b81a96dac51c6")
 ```
 **Enable logging (optional):**
@@ -74,7 +74,7 @@ You can enable logging by setting the 'verbose' parameter to True (default is Fa
 Set 'debug' parameter to True in order to log debugging messages too (default is False).
 Set 'logfile' string parameter to a full-path filename in order to make the library log messages into a file instead of using the console (default).
 E.g.:
-```
+```python
 _email = "user.example@gmail.com"
 _password = "myPassword"
 _sha256password = ""
@@ -84,7 +84,7 @@ _logfile = ""		#Log to console (default)
 client = MideaClient(_email, _password, _sha256password, _debug, _verbose, _logfile)
 ```
 **Step 3: Activate a new session by logging in**
-```
+```python
 res = client.login()
 if res == -1:
   print "Login error: please check log messages."
@@ -92,7 +92,7 @@ else:
   sessionId = client.current["sessionId"]
 ```
 **Step 4: Get the target deviceId by retrieving the list of configured appliances**
-```
+```python
 appliances = {}
 appliances = client.listAppliances()
 for a in appliances:
@@ -100,51 +100,51 @@ for a in appliances:
 ```
 **Step 5: Send commands to control the target device**
 Get the device state:
-```
+```python
 res = client.get_device_status(deviceId)
 if res == 1:
   print client.deviceStatus.toString()
 ```
 Power-on:
-```
+```python
 res = client.send_poweron_command(deviceId)
 if res:
   print client.deviceStatus.toString();
 ```
 Power-off:
-```
+```python
 res = client.send_poweroff_command(deviceId)
 if res:
   print client.deviceStatus.toString();
 ```
 Set Ion on:
-```
+```python
 res = client.send_ion_on_command(deviceId)
 if res:
   print client.deviceStatus.toString();
 ```
 Set Ion off:
-```
+```python
 res = client.send_ion_off_command(deviceId)
 if res:
   print client.deviceStatus.toString();
 ```
 Set fan speed:
-```
+```python
 if speed > 0 and speed < 100:
   res = client.send_fan_speed_command(deviceId, speed)
   if res:
     print client.deviceStatus.toString();
 ```
 Set target humidity:
-```
+```python
 if hum >= 30 and hum <= 70:
   res = client.send_target_humidity_command(deviceId, hum)
   if res:
     print client.deviceStatus.toString();
 ```
 Set operation mode:
-```
+```python
 if mode > 0 and mode < 5:
   res = client.send_mode_command(deviceId, mode)  #set Mode (1:TARGET_MODE, 2:CONTINOUS_MODE, 3:SMART_MODE, 4:DRYER_MODE)
   if res:
