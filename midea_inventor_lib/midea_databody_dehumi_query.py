@@ -1,6 +1,6 @@
 import binascii
 import logging
-from midea_fcCon import fcCon
+from .midea_fcCon import fcCon
 
 
 class DataBodyDeHumiQuery:

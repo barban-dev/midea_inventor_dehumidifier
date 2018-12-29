@@ -95,7 +95,7 @@ def main():
     do_test(numtest)
     numtest +=1
 
-  print "All tests passed."
+  print("All tests passed.")
   sys.exit(0)
 
 

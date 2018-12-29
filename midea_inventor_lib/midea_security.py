@@ -14,7 +14,6 @@ class MideaSecurity:
 
   @property
   def data_key(self):
-
     if self.app_key is None:
       logging.error("MideaSecurity: ERROR: app_key is not initialized.")
       return ""
@@ -24,7 +23,7 @@ class MideaSecurity:
       return ""
 
     m = hashlib.md5()
-    m.update(self.app_key)
+    m.update(self.app_key.encode('utf-8'))
     md5appkey = m.hexdigest()
 
     logging.debug("MideaSecurity: md5(app_key)=%s", md5appkey[:16])
@@ -41,8 +40,11 @@ class MideaSecurity:
 
     final = ""
     for b in blocks:
-      cipher = AES.new(key, AES.MODE_ECB)
-      final += cipher.decrypt(b)
+      #Python3 support
+      #cipher = AES.new(key, AES.MODE_ECB)
+      #final += cipher.decrypt(b)
+      cipher = AES.new(key.encode('utf-8'), AES.MODE_ECB)
+      final += cipher.decrypt(b).decode('utf-8')
       #logging.debug("MideaSecurity: block=%s", final)
 
     pad = ord(final[-1])
@@ -57,14 +59,18 @@ class MideaSecurity:
       logging.error("MideaSecurity: ERROR: app_key is not initialized.")
       return ""
 
-    hash_obj1 = hashlib.sha256(password)
+    #Python3 support
+    #hash_obj1 = hashlib.sha256(password)
+    hash_obj1 = hashlib.sha256(password.encode('utf-8'))
 
     #logging.debug("---------------------------------")
     #logging.debug(hash_obj1.hexdigest())
     #logging.debug("---------------------------------")
 
     strToHash = login_id+hash_obj1.hexdigest()+self.app_key
-    hash_obj2 = hashlib.sha256(strToHash)
+    #Python3 support
+    #hash_obj2 = hashlib.sha256(strToHash)
+    hash_obj2 = hashlib.sha256(strToHash.encode('utf-8'))
     return hash_obj2.hexdigest()
 
 
@@ -79,7 +85,9 @@ class MideaSecurity:
 
     logging.debug("MideaSecurity: strToHash=%s", strToHash)
 
-    hash_obj2 = hashlib.sha256(strToHash)
+    #Python3 support
+    #hash_obj2 = hashlib.sha256(strToHash)
+    hash_obj2 = hashlib.sha256(strToHash.encode('utf-8'))
     return hash_obj2.hexdigest()
 
 
@@ -107,7 +115,9 @@ class MideaSecurity:
     content = path+query+self.app_key
     #logging.debug(content)
 
-    hash_obj = hashlib.sha256(content)
+    #Python3 support
+    #hash_obj = hashlib.sha256(content)
+    hash_obj = hashlib.sha256(content.encode('utf-8'))
     return hash_obj.hexdigest()
 
 
@@ -148,9 +158,13 @@ class MideaSecurity:
 
     #logging.debug(blocks)
 
-    final = ""
+    #Python3 support
+    #final = ""
+    final = b""
     for b in blocks:
-      cipher = AES.new(key, AES.MODE_ECB)
+      #Python3 support
+      #cipher = AES.new(key, AES.MODE_ECB)
+      cipher = AES.new(key.encode('utf-8'), AES.MODE_ECB)
       final += cipher.encrypt(b)
 
     #logging.debug(final)
@@ -158,7 +172,9 @@ class MideaSecurity:
     enc_data = binascii.hexlify(final)
     logging.debug("MideaSecurity: enc_data=%s", enc_data)
 
-    return enc_data
+    #Python3 support
+    #return enc_data
+    return enc_data.decode('utf-8')
 
 
 

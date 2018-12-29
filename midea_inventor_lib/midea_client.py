@@ -3,11 +3,11 @@ import datetime
 import requests
 import json
 import logging
-from midea_security import MideaSecurity
-from midea_databody_dehumi_query import DataBodyDeHumiQuery
-from midea_databody_dehumi_response import DataBodyDeHumiResponse
-from midea_dehumidification_device import MideaDehumidificationDevice
-from midea_databody_dehumi_request import DataBodyDeHumiRequest
+from .midea_security import MideaSecurity
+from .midea_databody_dehumi_query import DataBodyDeHumiQuery
+from .midea_databody_dehumi_response import DataBodyDeHumiResponse
+from .midea_dehumidification_device import MideaDehumidificationDevice
+from .midea_databody_dehumi_request import DataBodyDeHumiRequest
 
 
 #Main class
@@ -23,7 +23,6 @@ class MideaClient:
 
 
   def __init__(self, email, password, sha256password, debug=False, verbose=False, logFile=""):
-
     #Set logging
     if debug:
       loglevel=logging.DEBUG

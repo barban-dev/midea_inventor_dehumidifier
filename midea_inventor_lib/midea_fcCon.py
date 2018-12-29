@@ -128,10 +128,10 @@ class fcCon:
         self.timingOffMinute = (((info[5] & self.KEYCODE_MEDIA_PAUSE) & 3) * 15) + (info[6] & 15)
     else:
       if 1 == self.timingOnSwitch and self.KEYCODE_MEDIA_PAUSE != (info[4] & self.KEYCODE_MEDIA_PAUSE):
-        self.timingOnHour = ((((info[4] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - ((info[6] >> 4) & 15)) / 60
+        self.timingOnHour = ((((info[4] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - ((info[6] >> 4) & 15)) // 60
         self.timingOnMinute = ((((info[4] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - ((info[6] >> 4) & 15)) % 60
       if 1 == self.timingOffSwitch and self.KEYCODE_MEDIA_PAUSE != (info[5] & self.KEYCODE_MEDIA_PAUSE):
-        self.timingOffHour = ((((info[5] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - (info[6] & 15)) / 60
+        self.timingOffHour = ((((info[5] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - (info[6] & 15)) // 60
         self.timingOffMinute = ((((info[5] & self.KEYCODE_MEDIA_PAUSE) + 1) * 15) - (info[6] & 15)) % 60
 
     self.humidity = info[7]
@@ -215,7 +215,7 @@ class fcCon:
       tmpBuf[2] = ((self.mode_FC_return & 15) << 4) | (self.mode_F1_return & 15)
       tmpBuf[3] = ((self.timingIsValid & 1) << 7) | (self.windSpeed & self.KEYCODE_MEDIA_PAUSE)
       if 1 == self.timingType:
-        tmpBuf[4] = ((self.timingOnSwitch << 7) | (self.timingOnHour << 2)) | (self.timingOnMinute / 15)
+        tmpBuf[4] = ((self.timingOnSwitch << 7) | (self.timingOnHour << 2)) | (self.timingOnMinute // 15)
         tmpBuf[5] = ((self.timingOffSwitch << 7) | (self.timingOffHour << 2)) | (self.timingOffMinute & 3)
         tmpBuf[6] = ((self.timingOnMinute % 15) << 4) | (self.timingOffMinute % 15)
       else:
@@ -226,10 +226,10 @@ class fcCon:
         else:
           tmpBuf[4] = 128
         if (tmpMinute % 15 != 0):
-          tmpBuf[4] = tmpBuf[4] | ((tmpMinute / 15) & self.KEYCODE_MEDIA_PAUSE)
+          tmpBuf[4] = tmpBuf[4] | ((tmpMinute // 15) & self.KEYCODE_MEDIA_PAUSE)
           tmpBuf[6] = tmpBuf[6] | (((15 - (tmpMinute % 15)) & 15) << 4)
         else:
-          tmpBuf[4] = tmpBuf[4] | (((tmpMinute / 15) - 1) & self.KEYCODE_MEDIA_PAUSE)
+          tmpBuf[4] = tmpBuf[4] | (((tmpMinute // 15) - 1) & self.KEYCODE_MEDIA_PAUSE)
           tmpBuf[6] = tmpBuf[6] & 15
           tmpMinute = (self.timingOffHour * 60) + self.timingOffMinute
         if (1 != self.timingOffSwitch or tmpMinute == 0):
@@ -238,10 +238,10 @@ class fcCon:
         else:
           tmpBuf[5] = 128
           if (tmpMinute % 15 != 0):
-            tmpBuf[5] = tmpBuf[5] | ((tmpMinute / 15) & self.KEYCODE_MEDIA_PAUSE)
+            tmpBuf[5] = tmpBuf[5] | ((tmpMinute // 15) & self.KEYCODE_MEDIA_PAUSE)
             tmpBuf[6] = tmpBuf[6] | ((15 - (tmpMinute % 15)) & 15)
           else:
-            tmpBuf[5] = tmpBuf[5] | (((tmpMinute / 15) - 1) & self.KEYCODE_MEDIA_PAUSE)
+            tmpBuf[5] = tmpBuf[5] | (((tmpMinute // 15) - 1) & self.KEYCODE_MEDIA_PAUSE)
             tmpBuf[6] = tmpBuf[6] & 240
 
       tmpBuf[7] = self.humidity & self.KEYCODE_MEDIA_PAUSE

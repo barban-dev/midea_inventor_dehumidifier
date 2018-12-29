@@ -1,6 +1,6 @@
 import logging
-from midea_fcCon import fcCon
-from midea_dehumidification_device import MideaDehumidificationDevice
+from .midea_fcCon import fcCon
+from .midea_dehumidification_device import MideaDehumidificationDevice
 
 
 class DataBodyDeHumiResponse:
