@@ -66,7 +66,15 @@ class MideaClient:
     logging.debug("MideaClient: executing login()")
 
     #Receive loginId by calling '/v1/user/login/id/get' API endpoint
-    result = self.__api_request("/v1/user/login/id/get", {"loginAccount": self.email})
+    response = self.__api_request("/v1/user/login/id/get", {"loginAccount": self.email})
+
+    if "result" in response:
+      result = response["result"]
+      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+    else:
+      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      return -1
+
     if not "loginId" in result:
       logging.error("MideaClient: ERROR trying to get login ID.")
       return -1
@@ -82,12 +90,19 @@ class MideaClient:
       logging.error("MideaClient: ERROR: a plaintext password or sha256 hash must be provided to log in.")
       return -1
 
-    #Log-in
-    #Receive accessToken and sessionId by calling '/v1/user/login' endpoint
-    self.current = self.__api_request("/v1/user/login",
+    #Log in to get valid accessToken and sessionId by calling '/v1/user/login' endpoint
+    response = self.__api_request("/v1/user/login",
       {"loginAccount": self.email,
       "password": encrypted_password}
     )
+
+    if "result" in response:
+      self.current = response["result"]
+      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+    else:
+      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      return -1
+
     if not "accessToken" in self.current:
       logging.error("MideaClient: ERROR trying to log in.")
       return -1
@@ -96,16 +111,26 @@ class MideaClient:
     logging.info("MideaClient: successfully logged in.")
     logging.info("MideaClient: accessToken=%s", self.security.access_token)
     logging.info("MideaClient: sessionId=%s", self.current["sessionId"])
+
     return 1
 
 
   def listAppliances(self):
+    logging.debug("MideaClient: listAppliances()")
+
     if self.current is None:
       logging.warning("MideaClient::listAppliances: API session is not initialized: login first.")
       return None
 
-    #Receive homegroupID by calling '/v1/homegroup/list/get' API endpoint
-    result = self.__api_request("/v1/homegroup/list/get")
+    #Receive homegroupId by calling '/v1/homegroup/list/get' API endpoint
+    response = self.__api_request("/v1/homegroup/list/get")
+
+    if "result" in response:
+      result = response["result"]
+      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+    else:
+      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      return -1
 
     if not "list" in result:
       logging.error("MideaClient::listAppliances: ERROR getting devices list.")
@@ -116,16 +141,27 @@ class MideaClient:
     for dict in result["list"]:
       if dict["isDefault"] == "1":
         self.default_home = dict
-        logging.info("MideaClient::listAppliances: ID of default device: %s", dict["id"])
+        logging.info("MideaClient::listAppliances: homegroupId: %s", dict["id"])
 
     if self.default_home is None:
-      logging.error("MideaClient::listAppliances: ERROR: default device not found.")
+      logging.error("MideaClient::listAppliances: ERROR: homegroupId not found.")
       return None
 
     #Receive appliance info by calling '/v1/appliance/list/get' API endpoint
-    result = self.__api_request("/v1/appliance/list/get",
+    response = self.__api_request("/v1/appliance/list/get",
         {"homegroupId": self.default_home["id"]}
       )
+
+    if "result" in response:
+      result = response["result"]
+      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+    else:
+      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      return -1
+
+    if not "list" in result:
+      logging.error("MideaClient::listAppliances: ERROR getting devices list.")
+      return None
 
     return result["list"]
 
@@ -166,6 +202,10 @@ class MideaClient:
     dataStr = ",".join(str(k) for k in data)
     decodedReplyStr = self.appliance_transparent_send(deviceId, dataStr)
 
+    if decodedReplyStr is None:
+      logging.error("MideaClient::get_device_status: invalid API response")
+      return -1
+
     #Convert from comma-separated int string to int array
     decoded_reply = []
     for d in decodedReplyStr.split(","):
@@ -173,6 +213,10 @@ class MideaClient:
       decoded_reply.append(n)
 
     status = decoded_reply[40:]
+    if not status:
+      logging.error("MideaClient::get_device_status: got invalid status from API response")
+      return -1
+
     #Process response (get device status)
     response = DataBodyDeHumiResponse()
     self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
@@ -433,16 +477,45 @@ class MideaClient:
     logging.debug("MideaClient::appliance_transparent_send: encoded_command=%s", encoded_command)
 
     #Send command to applicance via API /v1/appliance/transparent/send endpoint
-    result = self.__api_request("/v1/appliance/transparent/send",
+    response = self.__api_request("/v1/appliance/transparent/send",
         { "order": encoded_command,
           "funId": "0000",
           "applianceId": appliance_id })
 
-    #print "result="+json.dumps(result)
-    logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
 
-    #response = decode(response['reply']).split(',').map { |p| p.to_i & 0xff }
-    return self.__decode(result["reply"])
+    errorCodeStr = ""
+    if "errorCode" in response:
+      errorCodeStr = response["errorCode"]
+
+    if errorCodeStr != "0":
+      logging.error("MideaClient::send_api_request: errorCode=%s, errorMessage=\"%s\"", response["errorCode"], response["msg"])
+      if errorCodeStr == "3106":
+        #Manage invalidSession Error by performing a new login
+        logging.error("MideaClient: trying to login again due to invalidSession error...")
+        self.login()
+
+        #Re-encode command after login
+        encoded_command = self.__encode(dataStr2)
+        logging.debug("MideaClient::appliance_transparent_send: encoded_command=%s", encoded_command)
+
+        #Send again the command to applicance via API /v1/appliance/transparent/send endpoint
+        response = self.__api_request("/v1/appliance/transparent/send",
+            { "order": encoded_command,
+              "funId": "0000",
+              "applianceId": appliance_id })
+
+
+    if "result" in response:
+      result = response["result"]
+      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+      if not "reply" in result:
+        logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response: reply key not found")
+        return None
+      else:
+        return self.__decode(result["reply"])
+    else:
+      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response: result key not found")
+      return None
 
 
   def __api_request(self, endpoint, _args={}):
@@ -461,15 +534,15 @@ class MideaClient:
     if self.current is not None:
       args["sessionId"] = str(self.current["sessionId"])
 
-    #print endpoint
     argsStr = "&".join("=".join((str(k),str(v))) for k,v in args.items())
     #print argsStr
-    sign = self.security.sign(endpoint, argsStr)
-    args["sign"] = sign
+    args["sign"] = self.security.sign(endpoint, argsStr)
 
+    #Call __send_api_request
     path = self.SERVER_URL+endpoint
-    result = self.__send_api_request(path, args)
-    return result
+    response = self.__send_api_request(path, args)
+
+    return response
 
 
   def __send_api_request(self, uri, args):
@@ -479,15 +552,7 @@ class MideaClient:
     logging.info("MideaClient::send_api_request: response_status=%s, response_reason=%s", response.status_code, response.reason) #HTTP
 
     data = response.json()
-    errorCodeStr = data["errorCode"]
-    if errorCodeStr != "0":
-      logging.error("MideaClient::send_api_request: errorCode=%s, errorMessage=\"%s\"", data["errorCode"], data["msg"])
-      return "ERROR"
-    else:
-      if "result" in data:
-        return data["result"]
-      else:
-        return "ERROR"
+    return data
 
 
   def __encode(self, data):
