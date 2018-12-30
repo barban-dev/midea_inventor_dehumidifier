@@ -22,7 +22,7 @@ class MideaClient:
   LANGUAGE    = "en_US"
 
 
-  def __init__(self, email, password, sha256password, debug=False, verbose=False, logFile=""):
+  def __init__(self, email, password, sha256password, debug=False, verbose=False, logFile="", cacheTimeInSeconds=300):
     #Set logging
     if debug:
       loglevel=logging.DEBUG
@@ -58,6 +58,8 @@ class MideaClient:
     self.current = None
     self.deviceStatus = None
     self.default_home = None
+    self.cacheTimeStamp = 0    # Used to cache deviceStatus data
+    self.CACHE_TIME = cacheTimeInSeconds
 
 
   def login(self):
@@ -129,6 +131,15 @@ class MideaClient:
 
 
   def get_device_status(self, deviceId):
+    #Check if cached results are present and cab be used
+    if self.deviceStatus is not None and self.cacheTimeStamp:
+        now = time.time()
+        if now - self.cacheTimeStamp < self.CACHE_TIME:
+            #Cache results can be used
+            logging.info("MideaClient::get_device_status (cached): %s", self.deviceStatus.toString())
+            return 1
+
+
     if self.current is None:
       logging.warning("MideaClient::get_device_status: API session is not initialized: please login first.")
       return -1
@@ -165,8 +176,9 @@ class MideaClient:
     #Process response (get device status)
     response = DataBodyDeHumiResponse()
     self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
-    logging.info("MideaClient::get_device_status: %s", self.deviceStatus.toString())
+    self.cacheTimeStamp = time.time()    #Update cacheTimeStamp
 
+    logging.info("MideaClient::get_device_status: %s", self.deviceStatus.toString())
     return 1
 
 
