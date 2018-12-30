@@ -144,7 +144,7 @@ class MideaSecurity:
     """Encrypt dataStr using key (dataStr is a string of comma-separated integers)"""
 
     logging.debug("MideaSecurity: executing aes_encrypt()")
-    cipher = AES.new(key, AES.MODE_ECB)
+    cipher = AES.new(key.encode('utf-8'), AES.MODE_ECB)
 
     blocks = [dataStr[i:i+16] for i in range(0, len(dataStr), 16)]
     if len(blocks[-1]) < 16:
@@ -165,7 +165,7 @@ class MideaSecurity:
       #Python3 support
       #cipher = AES.new(key, AES.MODE_ECB)
       cipher = AES.new(key.encode('utf-8'), AES.MODE_ECB)
-      final += cipher.encrypt(b)
+      final += cipher.encrypt(b.encode('utf-8'))
 
     #logging.debug(final)
 
