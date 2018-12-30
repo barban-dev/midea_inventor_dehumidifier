@@ -5,27 +5,29 @@ class MideaDehumidificationDevice:
   def __init__(self):
     logging.debug("Initializing MideaDehumidificationDevice object")
 
-    self.powerMode = 0		#off
-    self.setMode = 0
-    self.humidity_set = 45
-    self.humidity_dot_set = 0
-    self.windSpeed = 40
-    self.ionSetSwitch = 0	#off
+    self._powerMode = 0		#off
+    self._setMode = 0
+    self._humidity = 50
+    self._humidity_set = 45
+    self._humidity_dot = 0
+    self._humidity_dot_set = 0
+    self._windSpeed = 40
+    self._ionSetSwitch = 0	#off
 
-    self.isDisplay = True
-    self.filterShow = False
-    self.tankShow = False
+    self._isDisplay = True
+    self._filterShow = False
+    self._tankShow = False
+    self._dryClothesSetSwitch = 0
+    self._upanddownSwing = 0
 
-    self.humidity = 50
-    self.humidity_dot = 0
-    self.dryClothesSetSwitch = 0
     self.timingCloseHour = 0
     self.timingCloseMark = 0
     self.timingCloseMinute = 0
     self.timingOpenHour = 0
     self.timingOpenMark = 0
     self.timingOpenMinute = 0
-    self.upanddownSwing = 0
+
+    ##Not used in dehumi device
     #self._faultMark = 0
     #self.mobileTiming = 0
     #self.modeRecovery = 0
@@ -35,19 +37,89 @@ class MideaDehumidificationDevice:
 
 
   def setStatus(self, status):
-    self.powerMode = status.powerMode
-    self.setMode = status.setMode
-    self.filterShow = status.filterShow
-    self.tankShow = status.tankShow
-    self.ionSetSwitch = status.ionSetSwitch
-    self.humidity = status.humidity
-    self.humidity_dot = status.humidity_dot
-    self.humidity_dot_set = status.humidity_dot_set
-    self.humidity_set = status.humidity_set
-    self.isDisplay = status.isDisplay
-    self.windSpeed = status.windSpeed
-    self.dryClothesSetSwitch = status.dryClothesSetSwitch
+    self._powerMode = status.powerMode
+    self._setMode = status.setMode
+    self._humidity = status.humidity
+    self._humidity_set = status.humidity_set
+    self._humidity_dot = status.humidity_dot
+    self._humidity_dot_set = status.humidity_dot_set
+    self._windSpeed = status.windSpeed
+    self._ionSetSwitch = status.ionSetSwitch
+
+    self._isDisplay = status.isDisplay
+    self._filterShow = status.filterShow
+    self._tankShow = status.tankShow
+    self._dryClothesSetSwitch = status.dryClothesSetSwitch
+    self._upanddownSwing = status.upanddownSwing
+
+    self._timingCloseHour = status._timingCloseHour
+    self._timingCloseMark = status._timingCloseMark
+    self._timingCloseMinute = status._timingCloseMinute
+    self._timingOpenHour = status._timingOpenHour
+    self._timingOpenMark = status._timingOpenMark
+    self._timingOpenMinute = status._timingOpenMinute
 
 
   def toString(self):
-    return "DeHumidification [switch=" + str(self.powerMode) + ", mode=" + str(self.setMode) + ", Filter=" + str(self.filterShow) + ", Water tank=" + str(self.tankShow) + ", Current humidity=" + str(self.humidity) + ", Current humidity (decimal)=" + str(self.humidity_dot) + ", Wind speed=" + str(self.windSpeed) + ", Set humidity=" + str(self.humidity_set) + ", Set humidity (decimal)" + str(self.humidity_dot_set) +", ionSetSwitch=" +str(self.ionSetSwitch) + ", isDisplay=" +str(self.isDisplay) + ", dryClothesSetSwitch=" +str(self.dryClothesSetSwitch) +"]"
+    #TODO: add timingXX attributes
+    return "DeHumidification [switch=" + str(self._powerMode) + ", mode=" + str(self._setMode) + ", Filter=" + str(self._filterShow) + ", Water tank=" + str(self._tankShow) + ", Current humidity=" + str(self._humidity) + ", Current humidity (decimal)=" + str(self._humidity_dot) + ", Wind speed=" + str(self._windSpeed) + ", Set humidity=" + str(self._humidity_set) + ", Set humidity (decimal)=" + str(self._humidity_dot_set) +", ionSetSwitch=" +str(self._ionSetSwitch) + ", isDisplay=" +str(self._isDisplay) + ", dryClothesSetSwitch=" + str(self._dryClothesSetSwitch) + ", Up&Down Swing=" +str(self._upanddownSwing) +"]"
+
+
+  @property
+  def powerMode(self):
+    return self._powerMode
+
+  @property
+  def setMode(self):
+    return self._setMode
+
+  @property
+  def humidity(self):
+    """Return the current humidity"""
+    return self._humidity
+
+  @property
+  def humidity_set(self):
+    """Return the target humidity"""
+    return self._humidity_set
+
+  @property
+  def humidity_dot(self):
+    """Return the current humidity (decimal)"""
+    return self._humidity_dot
+
+  @property
+  def humidity_dot_set(self):
+    """Return the target humidity (decimal)"""
+    return self._humidity_dot_set
+
+  @property
+  def windSpeed(self):
+    return self._windSpeed
+
+  @property
+  def ionSetSwitch(self):
+    return self._ionSetSwitch
+
+  @property
+  def isDisplay(self):
+    return self._isDisplay
+
+  @property
+  def filterShow(self):
+    return self_filterShow
+
+  @property
+  def tankShow(self):
+    return self._tankShow
+
+  @property
+  def dryClothesSetSwitch(self):
+    return self._dryClothesSetSwitch
+
+  @property
+  def upaddownSwing(self):
+    return self._upanddownSwing
+
+  #TODO: add timingXX attributes
+
