@@ -8,6 +8,7 @@
 [![<100kB](https://img.shields.io/github/languages/code-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![<100kB](https://img.shields.io/github/repo-size/barban-dev/midea_inventor_dehumidifier.svg)](https://github.com/barban-dev/midea_inventor_dehumidifier)
 [![Build status](https://travis-ci.com/barban-dev/midea_inventor_dehumidifier.svg?branch=master)](https://travis-ci.com/barban-dev/midea_inventor_dehumidifier)
+[![Known Vulnerabilities](https://snyk.io/test/github/barban-dev/midea_inventor_dehumidifier/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/barban-dev/midea_inventor_dehumidifier?targetFile=requirements.txt)
 [![HitCount](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier.svg)](http://hits.dwyl.io/barban-dev/midea_inventor_dehumidifier)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
 

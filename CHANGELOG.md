@@ -1,4 +1,4 @@
-# ${midea_inventor_dehumidifier} Change Log
+# midea_inventor_dehumidifier Change Log
 
 All notable changes to this project will be documented in this file.
 
