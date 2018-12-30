@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.0.3] - 2018-12-30
+### Added
+- Added support for cached device status results
+
 ### Changed
 - Changed pycrypto dependency with pycryptodome
 
