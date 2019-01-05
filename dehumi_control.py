@@ -90,7 +90,7 @@ def power_on():
       print("Device is already on.\n")
   else:
     res = client.send_poweron_command(deviceId)
-    if res:
+    if res is not None:
       print(client.deviceStatus.toString())
 
 
@@ -217,7 +217,7 @@ def set_humidity():
 
     if hum >= 30 and hum <= 70:
       res = client.send_target_humidity_command(deviceId, hum)
-      if res:
+      if res is not None:
         print(client.deviceStatus.toString())
 
 
