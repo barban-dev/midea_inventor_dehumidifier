@@ -18,7 +18,7 @@ class MideaDehumidificationDevice:
     self._filterShow = False
     self._tankShow = False
     self._dryClothesSetSwitch = 0
-    self._upanddownSwing = 0
+    self._upAndDownSwing = 0
 
     self.timingCloseHour = 0
     self.timingCloseMark = 0
@@ -50,7 +50,7 @@ class MideaDehumidificationDevice:
     self._filterShow = status.filterShow
     self._tankShow = status.tankShow
     self._dryClothesSetSwitch = status.dryClothesSetSwitch
-    self._upanddownSwing = status.upanddownSwing
+    self._upAndDownSwing = status.upAndDownSwing
 
     self._timingCloseHour = status._timingCloseHour
     self._timingCloseMark = status._timingCloseMark
@@ -62,7 +62,7 @@ class MideaDehumidificationDevice:
 
   def toString(self):
     #TODO: add timingXX attributes
-    return "DeHumidification [switch=" + str(self._powerMode) + ", mode=" + str(self._setMode) + ", Filter=" + str(self._filterShow) + ", Water tank=" + str(self._tankShow) + ", Current humidity=" + str(self._humidity) + ", Current humidity (decimal)=" + str(self._humidity_dot) + ", Wind speed=" + str(self._windSpeed) + ", Set humidity=" + str(self._humidity_set) + ", Set humidity (decimal)=" + str(self._humidity_dot_set) +", ionSetSwitch=" +str(self._ionSetSwitch) + ", isDisplay=" +str(self._isDisplay) + ", dryClothesSetSwitch=" + str(self._dryClothesSetSwitch) + ", Up&Down Swing=" +str(self._upanddownSwing) +"]"
+    return "DeHumidification [powerMode=" + str(self._powerMode) + ", mode=" + str(self._setMode) + ", Filter=" + str(self._filterShow) + ", Water tank=" + str(self._tankShow) + ", Current humidity=" + str(self._humidity) + ", Current humidity (decimal)=" + str(self._humidity_dot) + ", Wind speed=" + str(self._windSpeed) + ", Set humidity=" + str(self._humidity_set) + ", Set humidity (decimal)=" + str(self._humidity_dot_set) +", ionSetSwitch=" +str(self._ionSetSwitch) + ", isDisplay=" +str(self._isDisplay) + ", dryClothesSetSwitch=" + str(self._dryClothesSetSwitch) + ", Up&Down Swing=" +str(self._upAndDownSwing) +"]"
 
 
   @property
@@ -107,7 +107,7 @@ class MideaDehumidificationDevice:
 
   @property
   def filterShow(self):
-    return self_filterShow
+    return self._filterShow
 
   @property
   def tankShow(self):
@@ -118,8 +118,8 @@ class MideaDehumidificationDevice:
     return self._dryClothesSetSwitch
 
   @property
-  def upaddownSwing(self):
-    return self._upanddownSwing
+  def upAndDownSwing(self):
+    return self._upAndDownSwing
 
   #TODO: add timingXX attributes
 
