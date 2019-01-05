@@ -13,7 +13,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
 
 
-Author: Andrea Barbaresi =2018=
+Author: Andrea Barbaresi =2018, 2019=
 
 Licence: GPLv3
 
@@ -164,6 +164,16 @@ if mode > 0 and mode < 5:
   if res:
     print client.deviceStatus.toString();
 ```
+Set updated status (usefull to update multiple attributes at one):
+```python
+status =client.get_device_status(deviceId)  #get current status
+#Update status
+status.ionSetSwitch = 1   #Ion on
+status.setMode = 1        #target-mode
+res = self._client.send_update_status_command(self._device["id"], status)
+if res:
+  print client.deviceStatus.toString();
+```
 
 Client example
 --------------
@@ -174,6 +184,12 @@ To use the client, the email address of a registered user and the associated pas
 # python dehumi_control.py  -h
 Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_password> -l <logfile> [-h] [-v] [-d]
 ```
+
+Home Assistant custom-component
+-------------------------------
+[NEW] Custom-component for Home Assistant platform can be found on homeassistant folder.
+
+
 
 Internals 
 ---------
