@@ -229,15 +229,15 @@ class MideaClient:
   def send_poweron_command(self, deviceId):
     if self.current is None:
       logging.info("MideaClient::send_poweron_command: API session is not initialized: please login first.")
-      return -1
+      return None
 
     if self.deviceStatus is None:
       logging.info("MideaClient::send_poweron_command: device's status unknown: please call get_device_status() first.")
-      return -1
+      return None
 
     if self.deviceStatus.powerMode == 1:
       logging.info("MideaClient::send_poweron_command: device is already on.")
-      return 1
+      return None
 
     #Create new command request
     request = DataBodyDeHumiRequest()
@@ -312,19 +312,19 @@ class MideaClient:
   def send_target_humidity_command(self, deviceId, humidity):
     if self.current is None:
       logging.info("MideaClient::send_target_humidity_command: API session is not initialized: please login first.")
-      return 0
+      return None
 
     if self.deviceStatus is None:
       logging.info("MideaClient::send_target_humidity_command: device's status unknown: please call get_device_status() first.")
-      return 0
+      return None
 
     if self.deviceStatus.powerMode == 0:
       logging.info("MideaClient::send_target_humidity_command: device is off.")
-      return 0
+      return None
 
     if not (humidity >= 30 and humidity <= 70):
       logging.info("MideaClient::send_target_humidity_command: range for target humidity is not valid.")
-      return 0
+      return None
 
     #Create new command request
     request = DataBodyDeHumiRequest()
@@ -426,6 +426,48 @@ class MideaClient:
     request = DataBodyDeHumiRequest()
     request.setDataBodyStatus(self.deviceStatus)
     request.ionSetSwitch = 0  #off
+
+    #Header for non-power-related command
+    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    return self.__send_command(request, header, deviceId)
+
+
+  def send_update_status_command(self, deviceId, deviceStatus):
+    """ Generic command to set a new device status """
+
+    if self.current is None:
+      logging.info("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
+      return 0
+
+    if self.deviceStatus.powerMode == 0:
+      logging.info("MideaClient::send_ion_off_command: device is off.")
+      return 0
+
+    #Sanity checks
+    if deviceStatus.powerMode != 0 and deviceStatus.powerMode != 1:
+      logging.error("MideaClient::send_udpate_statis_command: invalid powerMode specified in device status.")
+      return 0
+    if not (deviceStatus.setMode >0 and deviceStatus.setMode <5):
+      logging.error("MideaClient::send_udpate_statis_command: invalid setMode specified in device status.")
+      return 0
+    if not (deviceStatus.humidity_set >=30 and deviceStatus.humidity_set <=70):
+      logging.error("MideaClient::send_udpate_statis_command: invalid target humidity specified in device status.")
+      return 0
+    #if not (deviceStatus.humidity_dot_set >=30 and deviceStatus.humidity_dot_set <=70):
+    #  logging.error("MideaClient::send_udpate_statis_command: invalid target humidity decimal specified in device status.")
+    #  return 0
+    if not (deviceStatus.windSpeed > 0 and deviceStatus.windSpeed <100):
+      logging.error("MideaClient::send_udpate_statis_command: invalid windSpeed specified in device status.")
+      return 0
+    if deviceStatus.ionSetSwitch != 0 and deviceStatus.ionSetSwitch != 1:
+      logging.error("MideaClient::send_udpate_statis_command: invalid ionSetSwitch specified in device status.")
+      return 0
+
+
+    #Create new command request
+    request = DataBodyDeHumiRequest()
+    request.setDataBodyStatus(deviceStatus)
 
     #Header for non-power-related command
     header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
