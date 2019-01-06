@@ -192,16 +192,24 @@ In order to activate the component, follow these steps:
 
 Step 1: Copy ***the content of*** ``/homeassistant`` folder (***not the folder itself***), ***including subfolders***, on your HA's configuration directory.
 
-Final result should look similat to this:
+Copy ``/midea_inventor_lib`` folder on \deps\lib\python3.6\site-packages\ of your HA's configuration directory.
+
+Final result should look similar to this:
 ```
 \\<ha_ip_address>
     └── config
-        └── custom_components
-            ├── climate
-            │   └── midea_dehumi.py
-            ├── midea_dehumi.py
-            └── sensor
-                └── midea_dehumi.py
+        ├── custom_components
+        │   ├── climate
+        │   │   └── midea_dehumi.py
+        │   ├── midea_dehumi.py
+        │   └── sensor
+        │       └── midea_dehumi.py
+        └── deps
+            └── lib
+                └── python3.6
+                    └── site-packages
+                        └── midea_inventor_lib
+                            └── libfiles...
 ```
 
 Step 2: Add the following section in your ``configuration.yaml``
