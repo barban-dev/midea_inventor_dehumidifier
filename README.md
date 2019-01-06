@@ -247,8 +247,8 @@ You can restart HA by using one of your preferred method (e.g. using reboot butt
 
 If everything is ok, you will find the following two new entities in your HA dashboard:
 
-* **climate.midea_dehumi_*[Device_ID]* **
-* **sensor.midea_dehumi_*[Device_ID]*_humidity *
+* **climate.midea_dehumi_*[Device_ID]***
+* **sensor.midea_dehumi_*[Device_ID]*_humidity**
 
 By means of the climate entity, you can control your appliance whereas the sensor reports the detected current humidity of your environment.
 
