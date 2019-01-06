@@ -187,25 +187,25 @@ Usage:dehumi_control.py -e <email_address> -p <cleartext password> -s <sha256_pa
 
 Home Assistant custom-component
 -------------------------------
-**[NEW]** Custom-component for Home Assistant platform can be found on homeassistant folder.
+**[NEW]** Custom-component for the Home Assistant platform can be found on ``/homeassistant`` folder.
 In order to activate the component, follow these steps:
-1) Copy the content of homeassistant folder (***not the folder itself***), ***including subfolders***, on your HA's configuration directory.
+1) Copy ***the content of*** ``/homeassistant`` folder (***not the folder itself***), ***including subfolders***, on your HA's configuration directory.
 2) Add the following section in your ``configuration.yaml``
-```python
+```
 midea_dehumi:
   username: user@example.com
   password: passwordExample
 ```
 As usual, you can hide your secret password by means of ``!secret`` notation by specifing it in ``secrets.yaml``
 
-Alternatively, if you prefer, sha256 parameter can be used to specify password's sha-256 hash in your configuration file:
-```python
+Alternatively, if you prefer, ``sha256password`` parameter can be used instead of the ``password`` one to specify password's sha-256 hash
+```
 midea_dehumi:
   username: user@example.com
   sha256password: cf76d55503cdee3....
 ```
 3) Activate DEBUG-level logging for the three entities the component consists of (optional but highly suggested in order to check if the component works as expected)
-```python
+```
 logger:
   default: info
   logs:
@@ -213,6 +213,14 @@ logger:
     custom_components.climate.midea_dehumi: debug
     custom_components.sensor.midea_dehumi: debug
 ```
+4) Restart HA 
+
+If everything is ok, you will find the following two new entities in your HA dashboard:
+```
+climate.midea_dehumi_[Device_ID]
+sensor.midea_dehumi_[Device_ID]
+```
+By means of the climate entity, you can control your appliance whereas the sensor reports the detected current humidity of your environment.
 
 Internals 
 ---------
