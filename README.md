@@ -243,7 +243,7 @@ logger:
 ```
 ** Step 4: Restart HA**
 
-You can restart HA by using one of your preferred method (e.g. using reboot button on Settings>General>Server Management og HA's Web dashboard).
+You can restart HA by using one of your preferred method (e.g. using restart button on Settings>General>Server Management og HA's Web dashboard).
 
 If everything is ok, you will find the following two new entities in your HA dashboard:
 
