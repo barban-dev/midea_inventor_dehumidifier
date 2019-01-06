@@ -191,6 +191,7 @@ Home Assistant custom-component
 In order to activate the component, follow these steps:
 
 Step 1: Copy ***the content of*** ``/homeassistant`` folder (***not the folder itself***), ***including subfolders***, on your HA's configuration directory.
+
 Step 2: Add the following section in your ``configuration.yaml``
 ```
 midea_dehumi:
