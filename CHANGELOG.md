@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2019-01-06
+### Fixed
+- Fixed bug preventing Home Assistant's sensor entity to update current humidity value
+
 ## [1.0.4] - 2019-01-06
 ### Fixed
 - Fixed faulty getter methods due to typos for MideaDehumidificationDevice class
