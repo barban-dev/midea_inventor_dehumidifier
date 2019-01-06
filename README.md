@@ -226,7 +226,7 @@ midea_dehumi:
   username: user@example.com
   sha256password: cf76d55503cdee3....
 ```
-Step 3: Activate DEBUG-level logging for the three entities the component consists of (optional but highly suggested in order to check if the component works as expected)
+Step 3: Activate DEBUG-level logging for the three components the midea-dehumi platform consists of (optional but highly suggested in order to check if the component works as expected)
 ```
 logger:
   default: info
