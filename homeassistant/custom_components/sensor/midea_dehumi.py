@@ -59,21 +59,22 @@ class MideaDehumiSensor(Entity):
         self._icon = 'mdi:water-percent'
         #self._battery = battery
 
+        self._climate_entity_id = 'climate.midea_dehumi_' + targetDevice['id']
+
         self._state = None
-        self._climate_entity_state = None
+        self.__updateStateFromClimateEntity()
 
-        #Retrieve the state of the climate midea_dehumi entity
-        climate_entity_id = 'climate.midea_dehumi_' + targetDevice['id']
+
+    def __updateStateFromClimateEntity(self):
+        """Update state from current_humidity attribute of climate entity"""
         #hass.sates.get is async friendly (ref. https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.StateMachine)
-        state = self._hass.states.get(climate_entity_id)
+        state = self._hass.states.get(self._climate_entity_id)
         if state:
-            self._climate_entity_state = state
-
+  		    #Update state
             self._state = state.attributes["current_humidity"]
             _LOGGER.debug("sensor.midea_dehumi: current humidity = %s", self._state)
         else:
             _LOGGER.debug("sensor.midea_dehumi: cannot retrieve the state of midea_humi climate entity")
-
 
     @property
     def unique_id(self):
@@ -106,13 +107,8 @@ class MideaDehumiSensor(Entity):
         return self._state
 
     async def async_update(self):
-        #Get the latest data from state's attributes of midea_dehumi climate entity
-        _LOGGER.debug("sensor.midea_dehumi: ASYC UPDATE called")
-        if self._climate_entity_state:
-            self._state = self._climate_entity_state.attributes["current_humidity"]
-            _LOGGER.debug("sensot.midea_dehumi: current humidity = %s", self._state)
-        else:
-            _LOGGER.debug("sensor.midea_dehumi: cannot retrieve the state of midea_humi climate entity")
+        """Update the state from the template."""
+        self.__updateStateFromClimateEntity()
 
     @property
     def should_poll(self):
