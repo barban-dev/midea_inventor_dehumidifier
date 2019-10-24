@@ -530,10 +530,9 @@ class MideaClient:
       errorCodeStr = response["errorCode"]
 
     if errorCodeStr != "0":
-      logging.error("MideaClient::send_api_request: errorCode=%s, errorMessage=\"%s\"", response["errorCode"], response["msg"])
       if errorCodeStr == "3106":
         #Manage invalidSession Error by performing a new login
-        logging.error("MideaClient: trying to login again due to invalidSession error...")
+        logging.debug("MideaClient: trying to login again due to invalidSession error...")
         self.login()
 
         #Re-encode command after login
@@ -545,6 +544,8 @@ class MideaClient:
             { "order": encoded_command,
               "funId": "0000",
               "applianceId": appliance_id })
+      else:
+        logging.error("MideaClient::send_api_request: errorCode=%s, errorMessage=\"%s\"", response["errorCode"], response["msg"])
 
 
     if "result" in response:
