@@ -36,10 +36,10 @@ class MideaClient:
 
     if not logFile:
       logging.basicConfig(level=loglevel)
-      logging.info("MideaClient: logging to console.")
+      logging.debug("MideaClient: logging to console.")
     else:
       logging.basicConfig(filename=logFile, level=loglevel)
-      logging.info("MideaClient: logging to file: %s", logFile)
+      logging.debug("MideaClient: logging to file: %s", logFile)
 
     logging.info("MideaClient: logging level set to: %s", loglevelStr)
 
@@ -141,7 +141,7 @@ class MideaClient:
     for dict in result["list"]:
       if dict["isDefault"] == "1":
         self.default_home = dict
-        logging.info("MideaClient::listAppliances: homegroupId: %s", dict["id"])
+        logging.debug("MideaClient::listAppliances: homegroupId: %s", dict["id"])
 
     if self.default_home is None:
       logging.error("MideaClient::listAppliances: ERROR: homegroupId not found.")
@@ -172,7 +172,7 @@ class MideaClient:
         now = time.time()
         if now - self.cacheTimeStamp < self.CACHE_TIME:
             #Cache results can be used
-            logging.info("MideaClient::get_device_status (cached): %s", self.deviceStatus.toString())
+            logging.debug("MideaClient::get_device_status (cached): %s", self.deviceStatus.toString())
             return 1
 
 
@@ -222,21 +222,21 @@ class MideaClient:
     self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
     self.cacheTimeStamp = time.time()    #Update cacheTimeStamp
 
-    logging.info("MideaClient::get_device_status: %s", self.deviceStatus.toString())
+    logging.debug("MideaClient::get_device_status: %s", self.deviceStatus.toString())
     return 1
 
 
   def send_poweron_command(self, deviceId):
     if self.current is None:
-      logging.info("MideaClient::send_poweron_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_poweron_command: API session is not initialized: please login first.")
       return None
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_poweron_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_poweron_command: device's status unknown: please call get_device_status() first.")
       return None
 
     if self.deviceStatus.powerMode == 1:
-      logging.info("MideaClient::send_poweron_command: device is already on.")
+      logging.debug("MideaClient::send_poweron_command: device is already on.")
       return None
 
     #Create new command request
@@ -251,15 +251,15 @@ class MideaClient:
 
   def send_poweroff_command(self, deviceId):
     if self.current is None:
-      logging.info("MideaClient::send_poweroff_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_poweroff_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_poweroff_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_poweroff_command: device's status unknown: please call get_device_status() first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_poweroff_command: device is already off.")
+      logging.debug("MideaClient::send_poweroff_command: device is already off.")
       return 0
 
     #Create new command request
@@ -284,19 +284,19 @@ class MideaClient:
 
   def send_fan_speed_command(self, deviceId, speed):
     if self.current is None:
-      loggin.info("MideaClient::send_fan_speed_command: API session is not initialized: please login first.")
+      loggin.debug("MideaClient::send_fan_speed_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_fan_speed_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_fan_speed_command: device's status unknown: please call get_device_status() first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_fan_speed_command: device is off.")
+      logging.debug("MideaClient::send_fan_speed_command: device is off.")
       return 0
 
     if not (speed > 0 and speed < 100):
-      logging.info("MideaClient::send_fan_speed_command: speed value is not valid.")
+      logging.debug("MideaClient::send_fan_speed_command: speed value is not valid.")
       return 0
 
     #Create new command request
@@ -311,19 +311,19 @@ class MideaClient:
 
   def send_target_humidity_command(self, deviceId, humidity):
     if self.current is None:
-      logging.info("MideaClient::send_target_humidity_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_target_humidity_command: API session is not initialized: please login first.")
       return None
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_target_humidity_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_target_humidity_command: device's status unknown: please call get_device_status() first.")
       return None
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_target_humidity_command: device is off.")
+      logging.debug("MideaClient::send_target_humidity_command: device is off.")
       return None
 
     if not (humidity >= 30 and humidity <= 70):
-      logging.info("MideaClient::send_target_humidity_command: range for target humidity is not valid.")
+      logging.debug("MideaClient::send_target_humidity_command: range for target humidity is not valid.")
       return None
 
     #Create new command request
@@ -351,19 +351,19 @@ class MideaClient:
 
   def send_mode_command(self, deviceId, mode):
     if self.current is None:
-      logging.info("MideaClient::send_mode_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_mode_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_mode_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_mode_command: device's status unknown: please call get_device_status() first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_mode_command: device is off.")
+      logging.debug("MideaClient::send_mode_command: device is off.")
       return 0
 
     if not (mode > 0 and mode < 5):
-      logging.info("MideaClient::send_mode_command: mode is not valid.")
+      logging.debug("MideaClient::send_mode_command: mode is not valid.")
       return 0
 
     #Create new command request
@@ -379,19 +379,19 @@ class MideaClient:
 
   def send_ion_on_command(self, deviceId):
     if self.current is None:
-      logging.info("MideaClient::send_ion_on_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_ion_on_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_ion_on_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_ion_on_command: device's status unknown: please call get_device_status() first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_ion_on_command: device is off.")
+      logging.debug("MideaClient::send_ion_on_command: device is off.")
       return 0
 
     if self.deviceStatus.ionSetSwitch == 1:
-      logging.info("MideaClient::send_ion_on_command: Ion mode is alreay on.")
+      logging.debug("MideaClient::send_ion_on_command: Ion mode is alreay on.")
       return 0
 
     #Create new command request
@@ -407,19 +407,19 @@ class MideaClient:
 
   def send_ion_off_command(self, deviceId):
     if self.current is None:
-      logging.info("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
-      logging.info("MideaClient::send_ion_off_command: device's status unknown: please call get_device_status() first.")
+      logging.debug("MideaClient::send_ion_off_command: device's status unknown: please call get_device_status() first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_ion_off_command: device is off.")
+      logging.debug("MideaClient::send_ion_off_command: device is off.")
       return 0
 
     if self.deviceStatus.ionSetSwitch == 0:
-      logging.info("MideaClient::send_ion_off_command: Ion mode is alreay off.")
+      logging.debug("MideaClient::send_ion_off_command: Ion mode is alreay off.")
       return 0
 
     #Create new command request
@@ -437,11 +437,11 @@ class MideaClient:
     """ Generic command to set a new device status """
 
     if self.current is None:
-      logging.info("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus.powerMode == 0:
-      logging.info("MideaClient::send_ion_off_command: device is off.")
+      logging.debug("MideaClient::send_ion_off_command: device is off.")
       return 0
 
     #Sanity checks
@@ -505,7 +505,7 @@ class MideaClient:
     #Process response (get device status)
     response = DataBodyDeHumiResponse()
     self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
-    logging.info("MideaClient::__send_command: %s", self.deviceStatus.toString())
+    logging.debug("MideaClient::__send_command: %s", self.deviceStatus.toString())
     return 1
 
 
@@ -591,7 +591,7 @@ class MideaClient:
     #Https POST request
     response = requests.post(uri, data=args)
     logging.debug("MideaClient::send_api_request: response=%s", response.text) #TEXT/HTML
-    logging.info("MideaClient::send_api_request: response_status=%s, response_reason=%s", response.status_code, response.reason) #HTTP
+    logging.debug("MideaClient::send_api_request: response_status=%s, response_reason=%s", response.status_code, response.reason) #HTTP
 
     data = response.json()
     return data
