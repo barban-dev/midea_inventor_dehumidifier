@@ -19,23 +19,83 @@ This repo contains the python package ***midea_inventor_lib*** that implements a
 
 Info about the dehumidifier appliance can be found [here.](https://www.inventorappliances.com/dehumidifiers/eva-ii-pro-wi-fi-20l)
 
-You can buy Inventor/Comfee smart dehumidifier appliances (WiFi version) on Amazon (the links below contain my referral code):
+You can buy Midea/Inventor/Comfee smart dehumidifier appliances (WiFi version) on Amazon sites (the links below contain my referral code):
+### Amazon USA
+* [Midea Cube 20 pint](https://amzn.to/3MA8R9b)
+* [Midea Cube 35 pint](https://amzn.to/4cOeFXp)
+* [Midea Cube 50 pint](https://amzn.to/3MuxWCE)
+* [Midea Cube 50 pint w pump](https://amzn.to/3MA8ZWd)
+* [Midea EasyDry 22 pint](https://amzn.to/3TdxAUy)
+* [Midea EasyDry 35 pint](https://amzn.to/4cLXJkl)
+* [Midea EasyDry 50 pint](https://amzn.to/4cNR6On)
+* [Midea EasyDry 50 pint w pump](https://amzn.to/3MugDSb)
+* [Midea EasyDry 50 pint w pump wifi upd](https://amzn.to/478YAuc)
+
+### Amazon UK
+* [Inventor Fresh](https://amzn.to/3AVFkEm)
+* [Comfee 10L](https://amzn.to/3XbAiLG)
+* [Comfee 10L w HEPA filter](https://amzn.to/3X1Blh6)
+* [Comfee 12L](https://amzn.to/3X8fx3p)
+* [Comfee 12L w HEPA filter](https://amzn.to/3Z1RHZM)
+* [Comfee 16L](https://amzn.to/3X7tte6)
+* [Comfee 20L](https://amzn.to/477QwK8)
+  
+### Amazon IT
+* [Midea FRESH DRY 10L](https://amzn.to/3AFEviX)
+* [Midea FRESH DRY 12L](https://amzn.to/3TbaY7c)
+* [Midea FRESH DRY 20L (DE plug)](https://amzn.to/478z0pk)
+* [Midea FRESH DRY 20L](https://amzn.to/3MqOHhY)
 * [Inventor Eva II PRO WiFi on Amazon.it](https://amzn.to/2RsIQMx)
 * [Comfee MDDP-50DEN7 on Amazon.it](https://amzn.to/3iuBX9D)
-
-* [Inventor Eva II PRO WiFi on Amazon.de](https://amzn.to/3iXpU5F)
-* [Comfee MDDP-50DEN7 on Amazon.de](https://amzn.to/3iZ5WYm)
-
-* [Inventor Eva II PRO WiFi on Amazon.es](https://amzn.to/39pYMJb)
-* [Comfee MDDP-50DEN7 on Amazon.es](https://amzn.to/2M3MqOn)
-
-* [Inventor Eva II PRO WiFi on Amazon.fr](https://amzn.to/3a1reBl)
-* [Comfee MDDP-50DEN7 on Amazon.fr](https://amzn.to/3d5eADc)
-
-* [Inventor Eva II PRO WiFi on Amazon.co.uk](https://amzn.to/3d5dSWy)
-* [Comfee MDDP-50DEN7 on Amazon.co.uk](https://amzn.to/3s6uJfP)
-
-
+  
+### Amazon DE
+* [Midea DF-20DEN7-WF](https://amzn.to/3MAep3v)
+* [Midea DF-20DEN7-WF](https://amzn.to/3TaMn2t)
+* [Midea Cube 20L](https://amzn.to/4e7ER0o)
+* [Midea Quiet 12L](https://amzn.to/478iEgo)
+* [Midea Quiet 20L](https://amzn.to/3ANpfkb)
+* [Midea Fesh Dry 10L](https://amzn.to/4cNUFUL)
+* [Midea Fesh Dry 12L](https://amzn.to/478HlJE)
+* [Comfeee MDDN-10DEN7 10L](https://amzn.to/3z2IHJ8)
+* [Comfeee MDDN-10DEN7 12L](https://amzn.to/3Xq234h)
+* [Comfeee MDDN-10DEN7 16L](https://amzn.to/3XsPPYA)
+* [Comfeee MDDN-10DEN7 20L](https://amzn.to/3Xufhft)
+* [Comfeee MDDN-10DEN7 30L](https://amzn.to/478ilSM)
+* [Comfeee MDDN-10DEN7 50L](https://amzn.to/3XosSWG)
+* [Comfeee Easy Dry 16L](https://amzn.to/4dL3DU2)
+* [Comfeee Easy Dry 20L](https://amzn.to/3z5gbXt)
+    
+### Amazon ES
+* [Midea Cube 20L](https://amzn.to/3zdecQN)
+* [Midea MDDF-20DEN7 20L](https://amzn.to/3T8qIrO)
+* [Midea MDDF-20DEN7 50L](https://amzn.to/4e8TQqD)
+* [Midea 12L](https://amzn.to/3ANqIHd)
+* [Midea 20L](https://amzn.to/4761JuZ)
+* [Midea 1500 pies](https://amzn.to/3Teer4T)
+* [Comfee 10L](https://amzn.to/4g7skM2)
+* [Comfee 12L](https://amzn.to/4e4pzcL)
+* [Comfee 20L](https://amzn.to/4gbXBxF)
+* [Comfee 20L new 2024 version](https://amzn.to/4dLaWeG)
+* [Comfee Easy Dry 16L new 2024 version](https://amzn.to/3z32ubu)
+* [Comfee Easy Dry 50L new 2024 version](https://amzn.to/3TbTjMT)
+  
+### Amazon FR
+* [Midea Cube 12L](https://amzn.to/478xHqa)
+* [Midea Cube 20L 80m2](https://amzn.to/3X86lfh)
+* [Midea Cube 20L 40m2](https://amzn.to/4g51YKL)
+* [Midea 12L](https://amzn.to/4gaVDgI)
+* [Midea 20L](https://amzn.to/3AVHwM6)
+* [Midea 50L](https://amzn.to/3AMkK9D)
+* [Midea ‎MAD22C1AWS](https://amzn.to/3XapltH)
+* [Midea Fresh Dry 10L w HEPA filter](https://amzn.to/4cM4jY5)
+* [Comfee 12L](https://amzn.to/3z1Urf0)
+* [Comfee 20L](https://amzn.to/3AJaPBM)
+* [Comfee 50L](https://amzn.to/47bQpNQ)
+* [Comfee MDDN-10DEN7 10L](https://amzn.to/4dHVKig)
+* [Comfee Easy Dry 12L](https://amzn.to/3Z2ten7)
+* [Comfee MDDF-20DEN7 20L](https://amzn.to/3Tdyxwp)
+* [Comfee MDDPE-30DEN7 30L](https://amzn.to/4dKjceV)
+  
 Target devices
 --------------
 Even though the library has been designed to generically address any kind of existing MIDEA devices, ***please note that at the moment the implemented functionalities work on the dehumidifier appliance only (0xA1 type devices).***
