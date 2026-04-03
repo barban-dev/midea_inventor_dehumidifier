@@ -70,9 +70,9 @@ class MideaClient:
 
     if "result" in response:
       result = response["result"]
-      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+      logging.debug("MideaClient::login: /v1/user/login/id/get result=%s", json.dumps(result))
     else:
-      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      logging.error("MideaClient::login: /v1/user/login/id/get ERROR - unexpected response: %s", json.dumps(response))
       return -1
 
     if not "loginId" in result:
@@ -98,9 +98,9 @@ class MideaClient:
 
     if "result" in response:
       self.current = response["result"]
-      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+      logging.debug("MideaClient::login: /v1/user/login result=%s", json.dumps(self.current))
     else:
-      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      logging.error("MideaClient::login: /v1/user/login ERROR - unexpected response: %s", json.dumps(response))
       return -1
 
     if not "accessToken" in self.current:
@@ -127,9 +127,9 @@ class MideaClient:
 
     if "result" in response:
       result = response["result"]
-      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+      logging.debug("MideaClient::listAppliances: /v1/homegroup/list/get result=%s", json.dumps(result))
     else:
-      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      logging.error("MideaClient::listAppliances: /v1/homegroup/list/get ERROR - unexpected response: %s", json.dumps(response))
       return -1
 
     if not "list" in result:
@@ -154,9 +154,9 @@ class MideaClient:
 
     if "result" in response:
       result = response["result"]
-      logging.debug("MideaClient::appliance_transparent_send: result=%s", json.dumps(result))
+      logging.debug("MideaClient::listAppliances: /v1/appliance/list/get result=%s", json.dumps(result))
     else:
-      logging.error("MideaClient::appliance_transparent_send: result=ERROR in API response")
+      logging.error("MideaClient::listAppliances: /v1/appliance/list/get ERROR - unexpected response: %s", json.dumps(response))
       return -1
 
     if not "list" in result:
