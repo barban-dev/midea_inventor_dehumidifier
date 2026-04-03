@@ -13,6 +13,8 @@
 
 Author: Andrea Barbaresi =2018-2024=
 
+**NEW: support for multiple devices introduced in v. 1.1.1 !!!**  
+  
 Licence: GPLv3
 
 This repo contains the python package ***midea_inventor_lib*** that implements a client-side library to connect to the Web API provided by Midea/Inventor, in order to remotely control an **EVA II PRO WiFi Smart Dehumidifier device**.
