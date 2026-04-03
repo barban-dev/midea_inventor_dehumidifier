@@ -67,4 +67,6 @@ class DataBodyDeHumiResponse:
     else:
       dehumi._isDisplay = False
 
+    dehumi._pumpSwitch = con.pumpSwitch
+
     return dehumi

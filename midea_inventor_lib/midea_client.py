@@ -284,7 +284,7 @@ class MideaClient:
 
   def send_fan_speed_command(self, deviceId, speed):
     if self.current is None:
-      loggin.debug("MideaClient::send_fan_speed_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_fan_speed_command: API session is not initialized: please login first.")
       return 0
 
     if self.deviceStatus is None:
@@ -370,6 +370,62 @@ class MideaClient:
     request = DataBodyDeHumiRequest()
     request.setDataBodyStatus(self.deviceStatus)
     request.setMode = mode  #set Mode (1:TARGET_MODE, 2:CONTINOUS_MODE, 3:SMART_MODE, 4:DRYER_MODE)
+
+    #Header for non-power-related command
+    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    return self.__send_command(request, header, deviceId)
+
+
+  def send_pump_on_command(self, deviceId):
+    if self.current is None:
+      logging.debug("MideaClient::send_pump_on_command: API session is not initialized: please login first.")
+      return 0
+
+    if self.deviceStatus is None:
+      logging.debug("MideaClient::send_pump_on_command: device's status unknown: please call get_device_status() first.")
+      return 0
+
+    if self.deviceStatus.powerMode == 0:
+      logging.debug("MideaClient::send_pump_on_command: device is off.")
+      return 0
+
+    if self.deviceStatus.pumpSwitch == 1:
+      logging.debug("MideaClient::send_pump_on_command: pump is already on.")
+      return 0
+
+    #Create new command request
+    request = DataBodyDeHumiRequest()
+    request.setDataBodyStatus(self.deviceStatus)
+    request.pumpSwitch = 1  #on
+
+    #Header for non-power-related command
+    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    return self.__send_command(request, header, deviceId)
+
+
+  def send_pump_off_command(self, deviceId):
+    if self.current is None:
+      logging.debug("MideaClient::send_pump_off_command: API session is not initialized: please login first.")
+      return 0
+
+    if self.deviceStatus is None:
+      logging.debug("MideaClient::send_pump_off_command: device's status unknown: please call get_device_status() first.")
+      return 0
+
+    if self.deviceStatus.powerMode == 0:
+      logging.debug("MideaClient::send_pump_off_command: device is off.")
+      return 0
+
+    if self.deviceStatus.pumpSwitch == 0:
+      logging.debug("MideaClient::send_pump_off_command: pump is already off.")
+      return 0
+
+    #Create new command request
+    request = DataBodyDeHumiRequest()
+    request.setDataBodyStatus(self.deviceStatus)
+    request.pumpSwitch = 0  #off
 
     #Header for non-power-related command
     header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]

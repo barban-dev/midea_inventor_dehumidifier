@@ -30,6 +30,7 @@ class DataBodyDeHumiRequest:
     self.timingOpenMark = 0
     self.timingOpenMinute = 0
     self.upanddownSwing = 0
+    self.pumpSwitch = 0
 
 
   def __addHead(self, bytes, deivceType, isQuery):
@@ -88,6 +89,8 @@ class DataBodyDeHumiRequest:
     con.controlSource = 1
     con.upanddownSwing = self.upanddownSwing
     con.mode_FD_return = self.setMode
+    con.pumpSwitch = self.pumpSwitch
+    con.pumpSwitch_flag = 1
 
     if self.isDisplay:
       con.displayClass = 0
@@ -135,4 +138,5 @@ class DataBodyDeHumiRequest:
     self.humidity_set = status.humidity_set
     self.isDisplay = status.isDisplay
     self.ionSetSwitch = status.ionSetSwitch
+    self.pumpSwitch = status.pumpSwitch
 

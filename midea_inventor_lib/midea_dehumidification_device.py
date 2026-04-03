@@ -13,6 +13,7 @@ class MideaDehumidificationDevice:
     self._humidity_dot_set = 0
     self._windSpeed = 40
     self._ionSetSwitch = 0	#off
+    self._pumpSwitch = 0	#off
 
     self._isDisplay = True
     self._filterShow = False
@@ -45,6 +46,7 @@ class MideaDehumidificationDevice:
     self._humidity_dot_set = status.humidity_dot_set
     self._windSpeed = status.windSpeed
     self._ionSetSwitch = status.ionSetSwitch
+    self._pumpSwitch = status.pumpSwitch
 
     self._isDisplay = status.isDisplay
     self._filterShow = status.filterShow
@@ -62,7 +64,7 @@ class MideaDehumidificationDevice:
 
   def toString(self):
     #TODO: add timingXX attributes
-    return "DeHumidification [powerMode=" + str(self._powerMode) + ", mode=" + str(self._setMode) + ", Filter=" + str(self._filterShow) + ", Water tank=" + str(self._tankShow) + ", Current humidity=" + str(self._humidity) + ", Current humidity (decimal)=" + str(self._humidity_dot) + ", Wind speed=" + str(self._windSpeed) + ", Set humidity=" + str(self._humidity_set) + ", Set humidity (decimal)=" + str(self._humidity_dot_set) +", ionSetSwitch=" +str(self._ionSetSwitch) + ", isDisplay=" +str(self._isDisplay) + ", dryClothesSetSwitch=" + str(self._dryClothesSetSwitch) + ", Up&Down Swing=" +str(self._upAndDownSwing) +"]"
+    return "DeHumidification [powerMode=" + str(self._powerMode) + ", mode=" + str(self._setMode) + ", Filter=" + str(self._filterShow) + ", Water tank=" + str(self._tankShow) + ", Current humidity=" + str(self._humidity) + ", Current humidity (decimal)=" + str(self._humidity_dot) + ", Wind speed=" + str(self._windSpeed) + ", Set humidity=" + str(self._humidity_set) + ", Set humidity (decimal)=" + str(self._humidity_dot_set) +", ionSetSwitch=" +str(self._ionSetSwitch) + ", pumpSwitch=" +str(self._pumpSwitch) + ", isDisplay=" +str(self._isDisplay) + ", dryClothesSetSwitch=" + str(self._dryClothesSetSwitch) + ", Up&Down Swing=" +str(self._upAndDownSwing) +"]"
 
 
   @property
@@ -100,6 +102,10 @@ class MideaDehumidificationDevice:
   @property
   def ionSetSwitch(self):
     return self._ionSetSwitch
+
+  @property
+  def pumpSwitch(self):
+    return self._pumpSwitch
 
   @property
   def isDisplay(self):
