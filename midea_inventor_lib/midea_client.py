@@ -56,9 +56,9 @@ class MideaClient:
     self.security = MideaSecurity(self.app_key)
 
     self.current = None
-    self.deviceStatus = None
+    self.deviceStatus = {}       # dict keyed by deviceId — supports multiple devices
+    self.cacheTimeStamp = {}     # dict keyed by deviceId
     self.default_home = None
-    self.cacheTimeStamp = 0    # Used to cache deviceStatus data
     self.CACHE_TIME = cacheTimeInSeconds
 
 
@@ -167,14 +167,13 @@ class MideaClient:
 
 
   def get_device_status(self, deviceId):
-    #Check if cached results are present and cab be used
-    if self.deviceStatus is not None and self.cacheTimeStamp:
+    #Check if cached results are present and can be used
+    if deviceId in self.deviceStatus and deviceId in self.cacheTimeStamp:
         now = time.time()
-        if now - self.cacheTimeStamp < self.CACHE_TIME:
+        if now - self.cacheTimeStamp[deviceId] < self.CACHE_TIME:
             #Cache results can be used
-            logging.debug("MideaClient::get_device_status (cached): %s", self.deviceStatus.toString())
+            logging.debug("MideaClient::get_device_status (cached): %s", self.deviceStatus[deviceId].toString())
             return 1
-
 
     if self.current is None:
       logging.warning("MideaClient::get_device_status: API session is not initialized: please login first.")
@@ -219,10 +218,10 @@ class MideaClient:
 
     #Process response (get device status)
     response = DataBodyDeHumiResponse()
-    self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
-    self.cacheTimeStamp = time.time()    #Update cacheTimeStamp
+    self.deviceStatus[deviceId] = response.toMideaDehumidificationDeviceObject(status)
+    self.cacheTimeStamp[deviceId] = time.time()    #Update cacheTimeStamp
 
-    logging.debug("MideaClient::get_device_status: %s", self.deviceStatus.toString())
+    logging.debug("MideaClient::get_device_status: %s", self.deviceStatus[deviceId].toString())
     return 1
 
 
@@ -231,17 +230,17 @@ class MideaClient:
       logging.debug("MideaClient::send_poweron_command: API session is not initialized: please login first.")
       return None
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_poweron_command: device's status unknown: please call get_device_status() first.")
       return None
 
-    if self.deviceStatus.powerMode == 1:
+    if self.deviceStatus[deviceId].powerMode == 1:
       logging.debug("MideaClient::send_poweron_command: device is already on.")
       return None
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.powerMode = 1  #power-on command
 
     #Header for switch-on/off & query-status command
@@ -254,17 +253,17 @@ class MideaClient:
       logging.debug("MideaClient::send_poweroff_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_poweroff_command: device's status unknown: please call get_device_status() first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_poweroff_command: device is already off.")
       return 0
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.powerMode = 0  #power-off command
 
     #Header for switch-on/off & query-status command
@@ -287,11 +286,11 @@ class MideaClient:
       logging.debug("MideaClient::send_fan_speed_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_fan_speed_command: device's status unknown: please call get_device_status() first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_fan_speed_command: device is off.")
       return 0
 
@@ -301,7 +300,7 @@ class MideaClient:
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.windSpeed = speed  #set speed
 
     #Header for non-power-related command
@@ -314,11 +313,11 @@ class MideaClient:
       logging.debug("MideaClient::send_target_humidity_command: API session is not initialized: please login first.")
       return None
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_target_humidity_command: device's status unknown: please call get_device_status() first.")
       return None
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_target_humidity_command: device is off.")
       return None
 
@@ -328,7 +327,7 @@ class MideaClient:
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.humidity_set = humidity  #set target humidity
 
     #Header for non-power-related command
@@ -354,11 +353,11 @@ class MideaClient:
       logging.debug("MideaClient::send_mode_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_mode_command: device's status unknown: please call get_device_status() first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_mode_command: device is off.")
       return 0
 
@@ -368,64 +367,8 @@ class MideaClient:
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.setMode = mode  #set Mode (1:TARGET_MODE, 2:CONTINOUS_MODE, 3:SMART_MODE, 4:DRYER_MODE)
-
-    #Header for non-power-related command
-    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-    return self.__send_command(request, header, deviceId)
-
-
-  def send_pump_on_command(self, deviceId):
-    if self.current is None:
-      logging.debug("MideaClient::send_pump_on_command: API session is not initialized: please login first.")
-      return 0
-
-    if self.deviceStatus is None:
-      logging.debug("MideaClient::send_pump_on_command: device's status unknown: please call get_device_status() first.")
-      return 0
-
-    if self.deviceStatus.powerMode == 0:
-      logging.debug("MideaClient::send_pump_on_command: device is off.")
-      return 0
-
-    if self.deviceStatus.pumpSwitch == 1:
-      logging.debug("MideaClient::send_pump_on_command: pump is already on.")
-      return 0
-
-    #Create new command request
-    request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
-    request.pumpSwitch = 1  #on
-
-    #Header for non-power-related command
-    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-    return self.__send_command(request, header, deviceId)
-
-
-  def send_pump_off_command(self, deviceId):
-    if self.current is None:
-      logging.debug("MideaClient::send_pump_off_command: API session is not initialized: please login first.")
-      return 0
-
-    if self.deviceStatus is None:
-      logging.debug("MideaClient::send_pump_off_command: device's status unknown: please call get_device_status() first.")
-      return 0
-
-    if self.deviceStatus.powerMode == 0:
-      logging.debug("MideaClient::send_pump_off_command: device is off.")
-      return 0
-
-    if self.deviceStatus.pumpSwitch == 0:
-      logging.debug("MideaClient::send_pump_off_command: pump is already off.")
-      return 0
-
-    #Create new command request
-    request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
-    request.pumpSwitch = 0  #off
 
     #Header for non-power-related command
     header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -438,21 +381,21 @@ class MideaClient:
       logging.debug("MideaClient::send_ion_on_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_ion_on_command: device's status unknown: please call get_device_status() first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_ion_on_command: device is off.")
       return 0
 
-    if self.deviceStatus.ionSetSwitch == 1:
+    if self.deviceStatus[deviceId].ionSetSwitch == 1:
       logging.debug("MideaClient::send_ion_on_command: Ion mode is alreay on.")
       return 0
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.ionSetSwitch = 1  #on
 
     #Header for non-power-related command
@@ -466,22 +409,78 @@ class MideaClient:
       logging.debug("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus is None:
+    if deviceId not in self.deviceStatus:
       logging.debug("MideaClient::send_ion_off_command: device's status unknown: please call get_device_status() first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
+    if self.deviceStatus[deviceId].powerMode == 0:
       logging.debug("MideaClient::send_ion_off_command: device is off.")
       return 0
 
-    if self.deviceStatus.ionSetSwitch == 0:
+    if self.deviceStatus[deviceId].ionSetSwitch == 0:
       logging.debug("MideaClient::send_ion_off_command: Ion mode is alreay off.")
       return 0
 
     #Create new command request
     request = DataBodyDeHumiRequest()
-    request.setDataBodyStatus(self.deviceStatus)
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
     request.ionSetSwitch = 0  #off
+
+    #Header for non-power-related command
+    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    return self.__send_command(request, header, deviceId)
+
+
+  def send_pump_on_command(self, deviceId):
+    if self.current is None:
+      logging.debug("MideaClient::send_pump_on_command: API session is not initialized: please login first.")
+      return 0
+
+    if deviceId not in self.deviceStatus:
+      logging.debug("MideaClient::send_pump_on_command: device's status unknown: please call get_device_status() first.")
+      return 0
+
+    if self.deviceStatus[deviceId].powerMode == 0:
+      logging.debug("MideaClient::send_pump_on_command: device is off.")
+      return 0
+
+    if self.deviceStatus[deviceId].pumpSwitch == 1:
+      logging.debug("MideaClient::send_pump_on_command: pump is already on.")
+      return 0
+
+    #Create new command request
+    request = DataBodyDeHumiRequest()
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
+    request.pumpSwitch = 1  #on
+
+    #Header for non-power-related command
+    header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    return self.__send_command(request, header, deviceId)
+
+
+  def send_pump_off_command(self, deviceId):
+    if self.current is None:
+      logging.debug("MideaClient::send_pump_off_command: API session is not initialized: please login first.")
+      return 0
+
+    if deviceId not in self.deviceStatus:
+      logging.debug("MideaClient::send_pump_off_command: device's status unknown: please call get_device_status() first.")
+      return 0
+
+    if self.deviceStatus[deviceId].powerMode == 0:
+      logging.debug("MideaClient::send_pump_off_command: device is off.")
+      return 0
+
+    if self.deviceStatus[deviceId].pumpSwitch == 0:
+      logging.debug("MideaClient::send_pump_off_command: pump is already off.")
+      return 0
+
+    #Create new command request
+    request = DataBodyDeHumiRequest()
+    request.setDataBodyStatus(self.deviceStatus[deviceId])
+    request.pumpSwitch = 0  #off
 
     #Header for non-power-related command
     header = [90,90,1,0,91,0,32,0,10,0,0,0,10,10,10,3,2,11,18,20,218,73,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -493,11 +492,15 @@ class MideaClient:
     """ Generic command to set a new device status """
 
     if self.current is None:
-      logging.debug("MideaClient::send_ion_off_command: API session is not initialized: please login first.")
+      logging.debug("MideaClient::send_update_status_command: API session is not initialized: please login first.")
       return 0
 
-    if self.deviceStatus.powerMode == 0:
-      logging.debug("MideaClient::send_ion_off_command: device is off.")
+    if deviceId not in self.deviceStatus:
+      logging.debug("MideaClient::send_update_status_command: device's status unknown: please call get_device_status() first.")
+      return 0
+
+    if self.deviceStatus[deviceId].powerMode == 0:
+      logging.debug("MideaClient::send_update_status_command: device is off.")
       return 0
 
     #Sanity checks
@@ -510,16 +513,12 @@ class MideaClient:
     if not (deviceStatus.humidity_set >=30 and deviceStatus.humidity_set <=70):
       logging.error("MideaClient::send_udpate_statis_command: invalid target humidity specified in device status.")
       return 0
-    #if not (deviceStatus.humidity_dot_set >=30 and deviceStatus.humidity_dot_set <=70):
-    #  logging.error("MideaClient::send_udpate_statis_command: invalid target humidity decimal specified in device status.")
-    #  return 0
     if not (deviceStatus.windSpeed > 0 and deviceStatus.windSpeed <100):
       logging.error("MideaClient::send_udpate_statis_command: invalid windSpeed specified in device status.")
       return 0
     if deviceStatus.ionSetSwitch != 0 and deviceStatus.ionSetSwitch != 1:
       logging.error("MideaClient::send_udpate_statis_command: invalid ionSetSwitch specified in device status.")
       return 0
-
 
     #Create new command request
     request = DataBodyDeHumiRequest()
@@ -560,8 +559,8 @@ class MideaClient:
     status = decoded_reply[40:]
     #Process response (get device status)
     response = DataBodyDeHumiResponse()
-    self.deviceStatus = response.toMideaDehumidificationDeviceObject(status)
-    logging.debug("MideaClient::__send_command: %s", self.deviceStatus.toString())
+    self.deviceStatus[deviceId] = response.toMideaDehumidificationDeviceObject(status)
+    logging.debug("MideaClient::__send_command: %s", self.deviceStatus[deviceId].toString())
     return 1
 
 
@@ -633,7 +632,6 @@ class MideaClient:
       args["sessionId"] = str(self.current["sessionId"])
 
     argsStr = "&".join("=".join((str(k),str(v))) for k,v in args.items())
-    #print argsStr
     args["sign"] = self.security.sign(endpoint, argsStr)
 
     #Call __send_api_request
