@@ -11,7 +11,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5E7ULVFGCGKU2&source=url)
 
 
-Author: Andrea Barbaresi =2018-2024=
+Author: Andrea Barbaresi =2018-2026=
 
 **NEW: support for multiple devices introduced in v. 1.1.1 !!!**  
   
